@@ -25,7 +25,7 @@ Requisitos do Projeto
 Configuração do Ambiente
 -------------------------
 
-Backend (C#)
+Backend (C#) "Ainda não finalizado"
 ~~~~~~~~~~~~~
 
 1. Clone o repositório do projeto
