@@ -13,7 +13,6 @@ const Form = () => {
 
     return (
         <div className="w-full py-3 px-4">
-            {console.log(user)}
             <form onSubmit={submit}>
                 <Input
                     placeholder="Exemplo@exemplo.com"
