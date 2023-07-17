@@ -1,15 +1,15 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Input from './Input'
 import Button from './Button'
 
-const submit = (event) => {
-    event.preventDefault()
-}
-
 const Form = () => {
-    const [email, setEmail] = React.useState('')
-    const [senha, setSenha] = React.useState('')
-    const [user, setUser] = React.useState(null)
+    const [email, setEmail] = useState('')
+    const [senha, setSenha] = useState('')
+    const [user, setUser] = useState(null)
+
+    const submit = (event) => {
+        event.preventDefault()
+    }
 
     return (
         <div className="w-full py-3 px-4">
