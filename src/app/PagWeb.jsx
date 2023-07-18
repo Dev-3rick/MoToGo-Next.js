@@ -13,7 +13,10 @@ const PagWeb = () => {
                 <span className="mt-96 mb-5 ">
                     O app de entrega mais rapido do Brasil
                 </span>
-                <img className="w-96" src="./ImgApp/Vectary-texture.png"></img>
+                <img
+                    className="w-96 mr-10 "
+                    src="./ImgApp/Group 8.17.png"
+                ></img>
             </div>
         </>
     )

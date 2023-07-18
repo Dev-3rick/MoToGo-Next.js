@@ -12,7 +12,7 @@ const Form = () => {
     }
 
     return (
-        <div className="w-full py-3 px-4">
+        <div className="w-full  px-4">
             <form onSubmit={submit}>
                 <Input
                     placeholder="Exemplo@exemplo.com"
@@ -31,7 +31,7 @@ const Form = () => {
                     setValue={setSenha}
                 />
 
-                <div className="flex gap-1 items-center  mt-5  mb-16">
+                <div className="flex gap-1 items-center  mt-5  mb-8">
                     <Button
                         text="Entregador"
                         color="bg-orange/60"
