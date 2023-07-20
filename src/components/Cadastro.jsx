@@ -13,7 +13,7 @@ const Cadastro = () => {
             />
             <h1 className="font-bold text-center text-4xl">MotoGo</h1>
             <span className="mt-1 mb-5 text-center">Cadastre-se</span>
-            <Form color="red" />
+            <Form />
         </div>
     )
 }

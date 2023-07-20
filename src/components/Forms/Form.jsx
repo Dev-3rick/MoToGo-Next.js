@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import Input from './Input'
-import Button from './Button'
+import Input from '../Fragment/Input'
+import Button from '../Fragment/Button'
 
 const Form = () => {
     const [email, setEmail] = useState('')

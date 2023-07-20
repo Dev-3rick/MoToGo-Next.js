@@ -4,17 +4,18 @@ import Nav from './Nav'
 const PagWeb = () => {
     return (
         <>
+            <Nav />
             <img
                 src="./ImgApp/Union Master.png"
                 className="absolute z-[-1]  -left-72 -top-60"
             ></img>
-            <div className="px-40">
+            <div className="px-32">
                 <h1 className="font-bold text-9xl mb-16">MotoGo </h1>{' '}
                 <span className="mt-96 mb-5 ">
                     O app de entrega mais rapido do Brasil
                 </span>
                 <img
-                    className="w-96 mr-10 "
+                    className=" pd w-[620px] mr-10 "
                     src="./ImgApp/Group 8.17.png"
                 ></img>
             </div>

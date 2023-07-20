@@ -1,6 +1,6 @@
 import React from 'react'
-import Input from './Input'
-import Button from './Button'
+import Input from '../Fragment/Input'
+import Button from '../Fragment/Button'
 
 const FormData = () => {
     const [nome, setNome] = React.useState('')
@@ -13,7 +13,7 @@ const FormData = () => {
     }
     return (
         <form
-            className="mt-6 flex flex-col gap-1 w-full py-3 "
+            className="mt-3 flex flex-col gap-1 w-full py-3 "
             onClick={clientData}
         >
             <Input
@@ -48,7 +48,7 @@ const FormData = () => {
                 setValue={setSenha}
                 type={'password'}
             ></Input>{' '}
-            <div className="w-2/3 mx-auto mt-7 ">
+            <div className="w-2/3 mx-auto mt-4 ">
                 <Button
                     text="Cadastrar"
                     color="bg-[#008AFF]/60 "
