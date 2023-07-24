@@ -1,3 +1,4 @@
+import Button from '@/components/Fragment/Button'
 import React from 'react'
 
 const PagApp = () => {
@@ -42,24 +43,15 @@ const PagApp = () => {
                     <h1 class="font-bold text-4xl p-2 text-center">
                         Solicite uma entrega{' '}
                     </h1>
-                    <span class="text-center">
+                    <span class="text-center mt-10">
                         Use cupom para seu primeiro pedido:
-                        <strong className="text-orange uppercase">
+                        <strong className="text-orange uppercase ">
                             {' '}
                             MoToGo2023
                         </strong>
-                        <button className="m-auto p-5 block">
-                            <div className="relative">
-                                <img
-                                    src="./ImgApp/btnPedido.png"
-                                    className="m-auto"
-                                />
-                                <img
-                                    src="./ImgApp/open.png"
-                                    className="absolute inset-0 m-auto"
-                                />
-                            </div>
-                        </button>
+                        <div className="w-40 mt-10 m-auto">
+                            <Button text="Novo Pedido" color="bg-[#0086FF] " />
+                        </div>
                     </span>
                 </div>
             </div>
