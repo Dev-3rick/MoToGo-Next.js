@@ -1,7 +1,13 @@
 import React from 'react'
 import Input from '../Fragment/Input'
 import Button from '../Fragment/Button'
-import GooglePlacesAutocomplete from 'react-google-places-autocomplete'
+import dynamic from 'next/dynamic'
+
+const GooglePlacesAutocomplete = dynamic(
+    () => import('react-google-places-autocomplete'),
+    { ssr: false }
+)
+
 const FormPedidos = () => {
     const [logradouroColeta, setLogradouroColeta] = React.useState('')
     const [numero, setNumero] = React.useState('')
@@ -22,21 +28,14 @@ const FormPedidos = () => {
             className="flex flex-col items-center pb-10 gap-2"
             onSubmit={FormPedidoSubmit}
         >
-            <GooglePlacesAutocomplete
-                apiKey="AIzaSyDVJoBo28gnJ4CdYo1m5cdJZdR6_uBojOM"
-                selectProps={{
-                    logradouroColeta,
-                    onChange: setLogradouroColeta,
-                }}
-            />
             {mostrarEntrega ? (
                 <>
-                    <Input
-                        id="LogadouroColeta"
-                        label="Logadouro de Coleta"
-                        type="text"
-                        value={logradouroColeta}
-                        setValue={setLogradouroColeta}
+                    <GooglePlacesAutocomplete
+                        apiKey="AIzaSyC9kWuM0oCoy6PsyhIsykG3XNRNZ2HIoe4"
+                        selectProps={{
+                            logradouroColeta,
+                            onChange: setLogradouroColeta,
+                        }}
                     />
                     <Input
                         id="NumColeta"
