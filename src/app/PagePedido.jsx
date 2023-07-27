@@ -11,6 +11,7 @@ const PagePedido = () => {
                 src="./ImgApp/elementosAzuis.png"
                 alt="icons"
             />
+            <img className="m-auto" src="./ImgApp/Caixa.png" alt="icons" />
             <FormPedido />
         </div>
     )

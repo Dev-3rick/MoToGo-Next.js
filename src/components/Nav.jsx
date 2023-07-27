@@ -5,7 +5,7 @@ const Nav = () => {
         <header className="bg-gradient-to-l from-gray-95000 rounded-b-2xl top-0 fixed w-full bg-[#b4471a]/60 text-black text-base p-5  pl-12 pr-44 flex justify-between items-center shadow-lg">
             <div className="flex items-center">
                 <img
-                    src="./ImgApp/Delivery-service-Orange (4) 2.png"
+                    src="./ImgApp/Motoboy.png  "
                     alt="Logo"
                     className="h-16 ml-4 mr-5"
                 />
