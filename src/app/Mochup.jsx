@@ -6,6 +6,7 @@ import PageSignupClient from './PageSignupClient'
 import PageSucess from './PageSucess'
 import PagApp from './PagApp'
 import PagePedido from './PagePedido'
+import FormPedidos from '@/components/Forms/FormPedidos'
 
 const Mochup = () => {
     const [type, setType] = useState('cadastro')
@@ -19,7 +20,7 @@ const Mochup = () => {
                 className="absolute -top-4  h-[782px] w-[480px] z-[-1] scale-{120} "
             ></img>
 
-            {type == 'cadastrso' ? <PageLogin /> : <PagePedido />}
+            {type == 'cadastrso' ? <PageLogin /> : <FormPedidos />}
         </div>
     )
 }
