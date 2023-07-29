@@ -1,6 +1,14 @@
 import React from 'react'
 
-const Input = ({ placeholder, type, label, value, setValue, id }) => {
+const Input = ({
+    placeholder,
+    type,
+    label,
+    value,
+    setValue,
+    id,
+    className,
+}) => {
     return (
         <div className="flex flex-auto flex-col gap-2">
             <label htmlFor={id} className="text-[#52525C]">

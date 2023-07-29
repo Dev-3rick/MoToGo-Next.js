@@ -1,7 +1,7 @@
-import FormPedidos from '@/app/PagePedido'
 import React from 'react'
 import Input from '../Fragment/Input'
 import Button from '../Fragment/Button'
+import AutocompleteInput from '../Fragment/AutocompleteInput'
 
 const FormPedido = () => {
     const [logradouroColeta, setLogradouroColeta] = React.useState('')
@@ -11,29 +11,39 @@ const FormPedido = () => {
     const [logradouroEntrega, setLogradouroEntrega] = React.useState('')
     const [numeroEntrega, setNumeroEntrega] = React.useState('')
     const [referenciaEntrega, setReferenciaEntrega] = React.useState('')
-
+    const [address, setAddress] = React.useState('')
     const [mostrarEntrega, setMostrarEntrega] = React.useState(true)
 
     const FormPedidoSubmit = (event) => {
         event.preventDefault()
     }
+
+    const handleAddressSelected = (selectedAddress) => {
+        setAddress(selectedAddress)
+    }
     return (
         <>
             <form onSubmit={FormPedidoSubmit}>
-                <div className="flex flex-col  bottom-0  absolute  gap-3 pb-10 w-[336px] ">
+                {' '}
+                <div className="flex flex-col  bottom-0  absolute  gap-3  pb-10 w-[336px] ">
                     <div className="w-72 m-auto ">
+                        {' '}
+                        <img
+                            className="m-auto  "
+                            src="./ImgApp/Caixa.png"
+                            alt="icons"
+                        />
                         {mostrarEntrega ? (
                             <>
-                                <h1 className="font-bold text-center pb-10 pt-10  text-4xl">
+                                <h1 className="font-bold text-center pb-5  text-4xl">
                                     Coleta
                                 </h1>
-                                <Input
-                                    id="logradouroColeta"
-                                    label="Logadouro de Entrega"
-                                    type="text"
-                                    value={logradouroColeta}
-                                    setValue={setLogradouroColeta}
+
+                                <AutocompleteInput
+                                    className="w-ful"
+                                    onAddressSelected={handleAddressSelected}
                                 />
+
                                 <Input
                                     id="NumColeta"
                                     label="Numero"
@@ -66,7 +76,8 @@ const FormPedido = () => {
                                         setClick={() => {
                                             setMostrarEntrega(
                                                 (mostrarEntrega) =>
-                                                    !mostrarEntrega
+                                                    !mostrarEntrega,
+                                                console.log(mostrarEntrega)
                                             )
                                         }}
                                         className="mt-6"
@@ -75,7 +86,7 @@ const FormPedido = () => {
                             </>
                         ) : (
                             <>
-                                <h1 className="font-bold text-center pb-10 pt-10  text-4xl">
+                                <h1 className="font-bold text-center pb-5 mt-10 text-4xl">
                                     Entrega
                                 </h1>
                                 <Input
