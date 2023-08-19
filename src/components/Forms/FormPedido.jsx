@@ -1,7 +1,8 @@
 import React from 'react'
 import Input from '../Fragment/Input'
 import Button from '../Fragment/Button'
-import AutocompleteInput from '../Fragment/AutocompleteInput'
+import AutocompleteInput from '../../app/Place'
+import Place from '../../app/Place'
 
 const FormPedido = () => {
     const [logradouroColeta, setLogradouroColeta] = React.useState('')
@@ -11,16 +12,13 @@ const FormPedido = () => {
     const [logradouroEntrega, setLogradouroEntrega] = React.useState('')
     const [numeroEntrega, setNumeroEntrega] = React.useState('')
     const [referenciaEntrega, setReferenciaEntrega] = React.useState('')
-    const [address, setAddress] = React.useState('')
+    const [address, setAddress] = React.useState(null)
     const [mostrarEntrega, setMostrarEntrega] = React.useState(true)
 
     const FormPedidoSubmit = (event) => {
         event.preventDefault()
     }
 
-    const handleAddressSelected = (selectedAddress) => {
-        setAddress(selectedAddress)
-    }
     return (
         <>
             <form onSubmit={FormPedidoSubmit}>
@@ -39,18 +37,11 @@ const FormPedido = () => {
                                     Coleta
                                 </h1>
 
-                                <AutocompleteInput
+                                <Place
                                     className="w-ful"
-                                    onAddressSelected={handleAddressSelected}
+                                    setSelected={setAddress}
                                 />
 
-                                <Input
-                                    id="NumColeta"
-                                    label="Numero"
-                                    type="number"
-                                    value={numero}
-                                    setValue={setNumero}
-                                />
                                 <Input
                                     id="EndEntrega"
                                     label="Referencia"
@@ -76,9 +67,9 @@ const FormPedido = () => {
                                         setClick={() => {
                                             setMostrarEntrega(
                                                 (mostrarEntrega) =>
-                                                    !mostrarEntrega,
-                                                console.log(mostrarEntrega)
+                                                    !mostrarEntrega
                                             )
+                                            alert({ address })
                                         }}
                                         className="mt-6"
                                     />
@@ -88,7 +79,8 @@ const FormPedido = () => {
                             <>
                                 <h1 className="font-bold text-center pb-5 mt-10 text-4xl">
                                     Entrega
-                                </h1>
+                                </h1>{' '}
+                                <Place setSelected={setAddress} />
                                 <Input
                                     id="LogadouroEntrega"
                                     label="Logadouro de Entrega"

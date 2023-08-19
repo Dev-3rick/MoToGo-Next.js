@@ -3,7 +3,7 @@ import PageLogin from './PageLogin'
 import PagePedido from '@/app/PagePedido'
 
 const Mochup = () => {
-    const [type, setType] = useState('cadastro')
+    const [type, setType] = useState('cadastrso')
     return (
         <div
             style={{ borderRadius: '80px' }}
@@ -14,7 +14,7 @@ const Mochup = () => {
                 className="absolute -top-4  h-[782px] w-[480px] z-[-1] "
             ></img>
 
-            {type == 'cadsastro' ? <PageLogin /> : <PagePedido />}
+            {type == 'cadastro' ? <PageLogin /> : <PagePedido />}
         </div>
     )
 }
