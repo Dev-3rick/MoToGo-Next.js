@@ -38,7 +38,8 @@ const FormPedido = () => {
                                 </h1>
 
                                 <Place
-                                    className="w-ful"
+                                    label="Endereço"
+                                    className="font-bold text-center pb-5  text-4xl"
                                     setSelected={setAddress}
                                 />
 
@@ -50,7 +51,7 @@ const FormPedido = () => {
                                     setValue={setObs}
                                 />
                                 <div>
-                                    <label htmlFor="obs" className="mr-auto">
+                                    <label htmlFor="obs" className="mt-3">
                                         Obs:
                                     </label>
                                     <textarea
@@ -58,7 +59,7 @@ const FormPedido = () => {
                                         id="obs"
                                         cols="24"
                                         rows="2"
-                                        className={`shadow- p-3 rounded-md border border-zinc-400 bg-zinc-100 outline-none`}
+                                        className={`shadow- p-3   w-full rounded-md border border-zinc-400 bg-zinc-100 outline-none`}
                                     ></textarea>{' '}
                                     <Button
                                         color="bg-[#008AFF]/60 "
@@ -69,7 +70,6 @@ const FormPedido = () => {
                                                 (mostrarEntrega) =>
                                                     !mostrarEntrega
                                             )
-                                            alert({ address })
                                         }}
                                         className="mt-6"
                                     />

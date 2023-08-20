@@ -1,6 +1,5 @@
 import React from 'react'
-import Input from '../components/Fragment/Input'
-import Button from '../components/Fragment/Button'
+
 import FormPedido from '../components/Forms/FormPedido'
 
 const PagePedido = () => {
