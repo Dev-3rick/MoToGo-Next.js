@@ -5,7 +5,7 @@ const PageSignupClient = () => {
     const newPrice = () => {}
     return (
         <div
-            style={{ borderRadius: '80px' }}
+            style={{ borderRadius: '81px' }}
             className="flex pt-20 justify-start  flex-col gap-[100px]"
         >
             <img
