@@ -2,7 +2,7 @@ import React from 'react'
 import Input from '../Fragment/Input'
 import Button from '../Fragment/Button'
 import Place from '../Fragment/Place'
-import useDistanceMatrix from '../Hooks/useDistanceMatrix'
+import useDistanceMatrix from '../../Hooks/useDistanceMatrix'
 import { GoogleMap, DistanceMatrixService } from '@react-google-maps/api'
 
 const FormPedido = () => {
