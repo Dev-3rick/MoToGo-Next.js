@@ -10,7 +10,7 @@ const PagePedido = () => {
                 src="./ImgApp/elementosAzuis.png"
                 alt="icons"
             />
-
+            <h1></h1>
             <div>
                 <FormPedido />
             </div>

@@ -2,11 +2,11 @@ import React from 'react'
 import Input from '../Fragment/Input'
 import Button from '../Fragment/Button'
 import Place from '../Fragment/Place'
-import useDistanceMatrix from '../../Hooks/useDistanceMatrix'
-import { GoogleMap, DistanceMatrixService } from '@react-google-maps/api'
+import DistanceMatrix from '../../Hooks/useDistanceMatrix'
 
 const FormPedido = () => {
     const [mostrarEntrega, setMostrarEntrega] = React.useState(true)
+    const [duration, setDuration] = React.useState('')
 
     const [logradouroColeta, setLogradouroColeta] = React.useState('')
     const [numeroColeta, setNumeroColeta] = React.useState('')
@@ -21,6 +21,7 @@ const FormPedido = () => {
     const FormPedidoSubmit = (event) => {
         event.preventDefault()
 
+        setDuration(DistanceMatrix(logradouroColeta, logradouroEntrega))
         console.log(logradouroColeta, numeroColeta, obsColeta, referenciaColeta)
         console.log(
             logradouroEntrega,
@@ -42,6 +43,7 @@ const FormPedido = () => {
                             src="./ImgApp/Caixa.png"
                             alt="icons"
                         />
+                        <p>{duration ? { duration } : ''}</p>
                         {mostrarEntrega ? (
                             <>
                                 <h1 className="font-bold text-center pb-5  text-4xl">

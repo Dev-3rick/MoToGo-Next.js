@@ -1,26 +1,38 @@
-import { useState, useEffect } from 'react'
+// components/DistanceMatrix.js
+import React, { useState, useEffect } from 'react'
 
-const useDistanceMatrix = (origin, destination) => {
-    const [distanceData, setDistanceData] = useState(null)
+const useDistanceMatrix = ({ coleta, retirada }) => {
+    const [distance, setDistance] = useState('')
+    const [duration, setDuration] = useState('')
 
     useEffect(() => {
-        const handleResponse = (response) => {
-            if (response) {
-                setDistanceData(response.rows[0].elements[0])
+        const origin = new google.maps.LatLng(coleta)
+        const destination = google.maps.LatLng(retirada)
+
+        const service = new google.maps.DistanceMatrixService()
+        service.getDistanceMatrix(
+            {
+                origins: [origin],
+                destinations: [destination],
+                travelMode: 'DRIVING',
+            },
+            (response, status) => {
+                if (status === 'OK') {
+                    // Processar a resposta aqui
+                    const distance = response.rows[0].elements[0].distance.text
+                    const duration = response.rows[0].elements[0].duration.text
+                    setDistance(distance)
+                    setDuration(duration)
+                } else {
+                    console.error(
+                        `Distance Matrix request failed with status: ${status}`
+                    )
+                }
             }
-        }
+        )
+    }, [coleta, retirada])
 
-        const options = {
-            destinations: [destination],
-            origins: [origin],
-            travelMode: 'DRIVING',
-        }
-
-        const distanceMatrixService =
-            new window.google.maps.DistanceMatrixService()
-        distanceMatrixService.getDistanceMatrix(options, handleResponse)
-    }, [origin, destination])
-
-    return distanceData
+    return distance, duration
 }
+
 export default useDistanceMatrix
