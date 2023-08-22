@@ -1,7 +1,6 @@
 import React from 'react'
 
 const Button = ({ text, type, color, className, setClick }) => {
-    console.log(type)
     if (type !== 'submit') {
         return (
             <button

@@ -19,11 +19,10 @@ const Input = ({
                 value={value}
                 onChange={({ target }) => {
                     setValue(target.value)
-                    console.log(value)
                 }}
                 type={type}
                 placeholder={placeholder}
-                className=" shadow- p-3 rounded-md border border-zinc-400 bg-zinc-100 outline-none"
+                className={`shadow- p-3 rounded-md border border-zinc-400 bg-zinc-100  ${className}`}
             />
         </div>
     )

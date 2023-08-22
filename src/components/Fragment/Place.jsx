@@ -20,7 +20,14 @@ const Place = ({ setSelected, label }) => {
         setValue,
         suggestions: { status, data },
         clearSuggestions,
-    } = usePlacesAutocomplete()
+    } = usePlacesAutocomplete({
+        requestOptions: {
+            locationBias: {
+                radius: 100,
+                center: { lat: -19.9369, lng: -43.4722 },
+            },
+        },
+    })
 
     const handleSelect = async (address) => {
         setValue(address, false)

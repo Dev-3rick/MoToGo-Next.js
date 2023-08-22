@@ -1,22 +1,33 @@
 import React from 'react'
 import Input from '../Fragment/Input'
 import Button from '../Fragment/Button'
-import AutocompleteInput from '../../app/Place'
-import Place from '../../app/Place'
+import Place from '../Fragment/Place'
+import useDistanceMatrix from '../Hooks/useDistanceMatrix'
+import { GoogleMap, DistanceMatrixService } from '@react-google-maps/api'
 
 const FormPedido = () => {
+    const [mostrarEntrega, setMostrarEntrega] = React.useState(true)
+
     const [logradouroColeta, setLogradouroColeta] = React.useState('')
-    const [numero, setNumero] = React.useState('')
-    const [obs, setObs] = React.useState('')
+    const [numeroColeta, setNumeroColeta] = React.useState('')
+    const [obsColeta, setObsColeta] = React.useState('')
+    const [referenciaColeta, setReferenciaColeta] = React.useState('')
 
     const [logradouroEntrega, setLogradouroEntrega] = React.useState('')
     const [numeroEntrega, setNumeroEntrega] = React.useState('')
     const [referenciaEntrega, setReferenciaEntrega] = React.useState('')
-    const [address, setAddress] = React.useState(null)
-    const [mostrarEntrega, setMostrarEntrega] = React.useState(true)
+    const [obsEntrega, setObsEntrega] = React.useState('')
 
     const FormPedidoSubmit = (event) => {
         event.preventDefault()
+
+        console.log(logradouroColeta, numeroColeta, obsColeta, referenciaColeta)
+        console.log(
+            logradouroEntrega,
+            numeroEntrega,
+            obsEntrega,
+            referenciaEntrega
+        )
     }
 
     return (
@@ -27,7 +38,7 @@ const FormPedido = () => {
                     <div className="w-72 m-auto ">
                         {' '}
                         <img
-                            className="m-auto  "
+                            className="m-auto "
                             src="./ImgApp/Caixa.png"
                             alt="icons"
                         />
@@ -36,19 +47,23 @@ const FormPedido = () => {
                                 <h1 className="font-bold text-center pb-5  text-4xl">
                                     Coleta
                                 </h1>
-
                                 <Place
-                                    label="Endereço"
-                                    className="font-bold text-center pb-5  text-4xl"
-                                    setSelected={setAddress}
+                                    label="Logadouro "
+                                    setSelected={setLogradouroColeta}
                                 />
-
                                 <Input
-                                    id="EndEntrega"
+                                    id="nColeta"
+                                    label="Numero"
+                                    type="number"
+                                    value={numeroColeta}
+                                    setValue={setNumeroColeta}
+                                />
+                                <Input
+                                    id="ReferenciaColeta"
                                     label="Referencia"
                                     type="text"
-                                    value={obs}
-                                    setValue={setObs}
+                                    value={referenciaColeta}
+                                    setValue={setReferenciaColeta}
                                 />
                                 <div>
                                     <label htmlFor="obs" className="mt-3">
@@ -59,13 +74,23 @@ const FormPedido = () => {
                                         id="obs"
                                         cols="24"
                                         rows="2"
-                                        className={`shadow- p-3   w-full rounded-md border border-zinc-400 bg-zinc-100 outline-none`}
+                                        value={obsColeta}
+                                        className={`shadow- p-3 w-full rounded-md border border-zinc-400 bg-zinc-100 outline-none`}
+                                        onChange={({ target }) => {
+                                            setObsColeta(target.value)
+                                        }}
                                     ></textarea>{' '}
                                     <Button
                                         color="bg-[#008AFF]/60 "
                                         text="Continuar"
                                         type="button"
                                         setClick={() => {
+                                            console.log(
+                                                logradouroColeta,
+                                                numeroColeta,
+                                                obsColeta,
+                                                referenciaColeta
+                                            )
                                             setMostrarEntrega(
                                                 (mostrarEntrega) =>
                                                     !mostrarEntrega
@@ -77,16 +102,12 @@ const FormPedido = () => {
                             </>
                         ) : (
                             <>
-                                <h1 className="font-bold text-center pb-5 mt-10 text-4xl">
+                                <h1 className="font-bold text-center pb-5  text-4xl">
                                     Entrega
                                 </h1>{' '}
-                                <Place setSelected={setAddress} />
-                                <Input
-                                    id="LogadouroEntrega"
-                                    label="Logadouro de Entrega"
-                                    type="text"
-                                    value={logradouroEntrega}
-                                    setValue={setLogradouroEntrega}
+                                <Place
+                                    setSelected={setLogradouroEntrega}
+                                    label="Logadouro"
                                 />
                                 <Input
                                     id="NumEntrega"
@@ -94,14 +115,30 @@ const FormPedido = () => {
                                     type="number"
                                     value={numeroEntrega}
                                     setValue={setNumeroEntrega}
-                                />
+                                />{' '}
                                 <Input
-                                    id="RefEntrega"
+                                    id="ReferenciaEntrega"
                                     label="Referencia"
                                     type="text"
                                     value={referenciaEntrega}
                                     setValue={setReferenciaEntrega}
-                                />{' '}
+                                />
+                                <div>
+                                    <label htmlFor="obs" className="mt-3">
+                                        Obs:
+                                    </label>
+                                    <textarea
+                                        name="Obs"
+                                        id="obs"
+                                        cols="24"
+                                        rows="2"
+                                        value={obsEntrega}
+                                        className={`shadow- p-3   w-full rounded-md border border-zinc-400 bg-zinc-100 outline-none`}
+                                        onChange={({ target }) => {
+                                            setObsEntrega(target.value)
+                                        }}
+                                    ></textarea>{' '}
+                                </div>{' '}
                                 <Button
                                     color="bg-[#008AFF]/60 "
                                     text="Continuar"
