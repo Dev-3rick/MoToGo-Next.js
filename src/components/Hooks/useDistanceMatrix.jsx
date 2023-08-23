@@ -1,11 +1,10 @@
-// components/DistanceMatrix.js
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
-const useDistanceMatrix = ({ coleta, retirada }) => {
-    const [distance, setDistance] = useState('')
-    const [duration, setDuration] = useState('')
+function DistanceMatrix({ coleta, retirada }) {
+    const [distance, setDistance] = React.useState('')
+    const [duration, setDuration] = React.useState('')
 
-    useEffect(() => {
+    React.useEffect(() => {
         const origin = new google.maps.LatLng(coleta)
         const destination = google.maps.LatLng(retirada)
 
@@ -32,7 +31,7 @@ const useDistanceMatrix = ({ coleta, retirada }) => {
         )
     }, [coleta, retirada])
 
-    return distance, duration
+    return { distance, duration }
 }
 
-export default useDistanceMatrix
+export default DistanceMatrix

@@ -2,7 +2,7 @@ import React from 'react'
 import Input from '../Fragment/Input'
 import Button from '../Fragment/Button'
 import Place from '../Fragment/Place'
-import DistanceMatrix from '../../Hooks/useDistanceMatrix'
+import DistanceMatrix from '../Hooks/useDistanceMatrix'
 
 const FormPedido = () => {
     const [mostrarEntrega, setMostrarEntrega] = React.useState(true)
