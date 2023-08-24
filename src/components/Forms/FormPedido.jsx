@@ -2,8 +2,8 @@ import React from 'react'
 import Input from '../Fragment/Input'
 import Button from '../Fragment/Button'
 import Place from '../Fragment/Place'
-import useDistanceMatrix from '../../Hooks/useDistanceMatrix'
-import { GoogleMap, DistanceMatrixService } from '@react-google-maps/api'
+import ExemploComponent from '../Fragment/ExemploComponent'
+
 
 const FormPedido = () => {
     const [mostrarEntrega, setMostrarEntrega] = React.useState(true)
@@ -35,13 +35,14 @@ const FormPedido = () => {
             <form onSubmit={FormPedidoSubmit}>
                 {' '}
                 <div className="flex flex-col  bottom-0  absolute  gap-3  pb-10 w-[336px] ">
+
                     <div className="w-72 m-auto ">
                         {' '}
                         <img
                             className="m-auto "
                             src="./ImgApp/Caixa.png"
                             alt="icons"
-                        />
+                        /> 
                         {mostrarEntrega ? (
                             <>
                                 <h1 className="font-bold text-center pb-5  text-4xl">
@@ -144,7 +145,7 @@ const FormPedido = () => {
                                     text="Continuar"
                                     type="submit"
                                     className="mt-6"
-                                />
+                                    />   <ExemploComponent />
                             </>
                         )}
                     </div>

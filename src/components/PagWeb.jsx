@@ -1,9 +1,11 @@
 import React from 'react'
 import Nav from './Nav'
+import ExemploComponent from "../components/Fragment/ExemploComponent"
 
 const PagWeb = () => {
     return (
-        <>
+
+        <><ExemploComponent />
             <Nav />
             <img
                 src="./ImgApp/Union Master.png"
