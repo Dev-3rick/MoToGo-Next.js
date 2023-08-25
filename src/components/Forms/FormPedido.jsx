@@ -4,7 +4,6 @@ import Button from '../Fragment/Button'
 import Place from '../Fragment/Place'
 import ExemploComponent from '../Fragment/ExemploComponent'
 
-
 const FormPedido = () => {
     const [mostrarEntrega, setMostrarEntrega] = React.useState(true)
 
@@ -18,9 +17,39 @@ const FormPedido = () => {
     const [referenciaEntrega, setReferenciaEntrega] = React.useState('')
     const [obsEntrega, setObsEntrega] = React.useState('')
 
+    function DistanceMatrix(originLatLng, destinationLatLng) {
+        let distanceInfo = {
+            distance: null,
+            duration: null,
+        }
+
+        const distanceCallback = (response, status) => {
+            if (status === 'OK') {
+                const element = response.rows[0].elements[0]
+                const distance = element.distance.text
+                const duration = element.duration.text
+
+                distanceInfo = {
+                    distance,
+                    duration,
+                }
+            } else {
+                console.error('Erro na solicitação da API:', status)
+            }
+        }
+        var service = new google.maps.DistanceMatrixService()
+        service.getDistanceMatrix(
+            {
+                origins: [logradouroColeta, logradouroEntrega],
+                destinations: [logradouroColeta, logradouroEntrega],
+                travelMode: 'DRIVING',
+            },
+            distanceCallback
+        )
+    }
+
     const FormPedidoSubmit = (event) => {
         event.preventDefault()
-
         console.log(logradouroColeta, numeroColeta, obsColeta, referenciaColeta)
         console.log(
             logradouroEntrega,
@@ -35,14 +64,13 @@ const FormPedido = () => {
             <form onSubmit={FormPedidoSubmit}>
                 {' '}
                 <div className="flex flex-col  bottom-0  absolute  gap-3  pb-10 w-[336px] ">
-
                     <div className="w-72 m-auto ">
                         {' '}
                         <img
                             className="m-auto "
                             src="./ImgApp/Caixa.png"
                             alt="icons"
-                        /> 
+                        />
                         {mostrarEntrega ? (
                             <>
                                 <h1 className="font-bold text-center pb-5  text-4xl">
@@ -145,7 +173,8 @@ const FormPedido = () => {
                                     text="Continuar"
                                     type="submit"
                                     className="mt-6"
-                                    />   <ExemploComponent />
+                                />{' '}
+                                <ExemploComponent />
                             </>
                         )}
                     </div>
