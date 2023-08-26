@@ -32,10 +32,10 @@ const Place = ({ setSelected, label }) => {
     const handleSelect = async (address) => {
         setValue(address, false)
         clearSuggestions()
-
+        console.log(address)
         const results = await getGeocode({ address })
         const { lat, lng } = await getLatLng(results[0])
-        setSelected({ lat, lng })
+        setSelected(address, { lat, lng })
     }
 
     return (

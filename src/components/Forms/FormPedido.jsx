@@ -3,7 +3,7 @@ import Input from '../Fragment/Input'
 import Button from '../Fragment/Button'
 import Place from '../Fragment/Place'
 
-const FormPedido = () => {
+const FormPedido = ({ onSubmit }) => {
     const [mostrarEntrega, setMostrarEntrega] = React.useState(true)
 
     const [logradouroColeta, setLogradouroColeta] = React.useState('')
@@ -16,7 +16,10 @@ const FormPedido = () => {
     const [referenciaEntrega, setReferenciaEntrega] = React.useState('')
     const [obsEntrega, setObsEntrega] = React.useState('')
 
-    const [distance, setDistance] = React.useState()
+    const [distanceInfo, setDistanceInfo] = React.useState({
+        distance: null,
+        duration: null,
+    })
 
     async function DistanceMatrix(originLatLng, destinationLatLng) {
         let distanceInfo = {
@@ -29,23 +32,15 @@ const FormPedido = () => {
                 var origins = response.originAddresses
                 var destinations = response.destinationAddresses
 
-                for (var i = 0; i < origins.length; i++) {
-                    var results = response.rows[i].elements
-                    for (var j = 0; j < results.length; j++) {
-                        var element = results[j]
-                        var distance = element.distance.text
-                        var duration = element.duration.text
-                        var from = origins[i]
-                        var to = destinations[j]
-                    }
-                }
+                console.log(JSON.stringify(destinations))
+                console.log(JSON.stringify(response))
             }
         }
-        var service = new google.maps.DistanceMatrixService()
+        const service = new google.maps.DistanceMatrixService()
         service.getDistanceMatrix(
             {
-                origins: [originLatLng, destinationLatLng],
-                destinations: [logradouroColeta, logradouroEntrega],
+                origins: [originLatLng],
+                destinations: [destinationLatLng],
                 travelMode: 'DRIVING',
             },
             callback
@@ -56,14 +51,19 @@ const FormPedido = () => {
 
     const FormPedidoSubmit = (event) => {
         event.preventDefault()
-        setDistance(DistanceMatrix(logradouroColeta, logradouroEntrega))
-        console.log(logradouroColeta, numeroColeta, obsColeta, referenciaColeta)
-        console.log(
+        let distanceInfo = DistanceMatrix(logradouroColeta, logradouroEntrega)
+        setDistanceInfo(distanceInfo)
+        onSubmit({
+            logradouroColeta,
+            numeroColeta,
+            obsColeta,
+            referenciaColeta,
             logradouroEntrega,
             numeroEntrega,
             obsEntrega,
-            referenciaEntrega
-        )
+            referenciaEntrega,
+            distanceInfo,
+        })
     }
 
     return (
@@ -78,7 +78,6 @@ const FormPedido = () => {
                             src="./ImgApp/Caixa.png"
                             alt="icons"
                         />
-                        {distance ? <p>{}</p> : 'av'}
                         {mostrarEntrega ? (
                             <>
                                 <h1 className="font-bold text-center pb-5  text-4xl">
@@ -99,7 +98,8 @@ const FormPedido = () => {
                                     id="ReferenciaColeta"
                                     label="Referencia"
                                     type="text"
-                                    value={referenciaColeta}
+                                    v
+                                    alue={referenciaColeta}
                                     setValue={setReferenciaColeta}
                                 />
                                 <div>

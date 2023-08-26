@@ -3,6 +3,7 @@ import React from 'react'
 import FormPedido from '../components/Forms/FormPedido'
 
 const PagePedido = () => {
+    const [DataPedito, setDataPedido] = React.useState({})
     return (
         <div className="h-full w-[335px] rounded-[40px] ">
             <img
@@ -12,7 +13,7 @@ const PagePedido = () => {
             />
 
             <div>
-                <FormPedido />
+                <FormPedido onSubmit={setDataPedido} />
             </div>
         </div>
     )
