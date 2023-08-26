@@ -21,11 +21,26 @@ const FormPedido = ({ onSubmit }) => {
         duration: null,
     })
 
-    async function DistanceMatrix(originLatLng, destinationLatLng) {
-        let distanceInfo = {
-            distance: null,
-            duration: null,
-        }
+    async function DistanceMatrix(logradouro, numero) {
+        const logradouroColetaComNumeor = logradouroColeta.split('-')[0]
+        const newStreetName = logradouroColetaComNumeor.replace(
+            '-',
+            ' - ' + variavel
+        )
+        console.log(numeroColeta)
+
+        const results = await getGeocode({ address })
+        const { lat, lng } = await getLatLng(results[0])
+
+        const service = new google.maps.DistanceMatrixService()
+        const distanceCallback = service.getDistanceMatrix(
+            {
+                origins: [originLatLng],
+                destinations: [destinationLatLng],
+                travelMode: 'DRIVING',
+            },
+            callback
+        )
 
         function callback(response, status) {
             if (status == 'OK') {
@@ -36,34 +51,30 @@ const FormPedido = ({ onSubmit }) => {
                 console.log(JSON.stringify(response))
             }
         }
-        const service = new google.maps.DistanceMatrixService()
-        service.getDistanceMatrix(
-            {
-                origins: [originLatLng],
-                destinations: [destinationLatLng],
-                travelMode: 'DRIVING',
-            },
-            callback
-        )
 
-        return distanceInfo
+        return distanceCallback
     }
 
     const FormPedidoSubmit = (event) => {
         event.preventDefault()
-        let distanceInfo = DistanceMatrix(logradouroColeta, logradouroEntrega)
-        setDistanceInfo(distanceInfo)
-        onSubmit({
-            logradouroColeta,
-            numeroColeta,
-            obsColeta,
-            referenciaColeta,
-            logradouroEntrega,
-            numeroEntrega,
-            obsEntrega,
-            referenciaEntrega,
-            distanceInfo,
-        })
+
+        if (numeroColeta && numeroEntrega) {
+            setDistanceInfo(DistanceMatrix(logradouroColeta, logradouroEntrega))
+            onSubmit({
+                logradouroColeta,
+                numeroColeta,
+                obsColeta,
+                referenciaColeta,
+                logradouroEntrega,
+                numeroEntrega,
+                obsEntrega,
+                referenciaEntrega,
+                distanceInfo,
+            })
+            setMostrarEntrega((mostrarEntrega) => !mostrarEntrega)
+        } else {
+            alert('digite um Numero para Entrega')
+        }
     }
 
     return (
@@ -93,13 +104,13 @@ const FormPedido = ({ onSubmit }) => {
                                     type="number"
                                     value={numeroColeta}
                                     setValue={setNumeroColeta}
+                                    required
                                 />
                                 <Input
                                     id="ReferenciaColeta"
                                     label="Referencia"
                                     type="text"
-                                    v
-                                    alue={referenciaColeta}
+                                    value={referenciaColeta}
                                     setValue={setReferenciaColeta}
                                 />
                                 <div>
@@ -121,19 +132,19 @@ const FormPedido = ({ onSubmit }) => {
                                         color="bg-[#008AFF]/60 "
                                         text="Continuar"
                                         type="button"
-                                        setClick={() => {
-                                            console.log(
-                                                logradouroColeta,
-                                                numeroColeta,
-                                                obsColeta,
-                                                referenciaColeta
-                                            )
-                                            setMostrarEntrega(
-                                                (mostrarEntrega) =>
-                                                    !mostrarEntrega
-                                            )
-                                        }}
                                         className="mt-6"
+                                        setClick={() => {
+                                            if (numeroColeta) {
+                                                setMostrarEntrega(
+                                                    (mostrarEntrega) =>
+                                                        !mostrarEntrega
+                                                )
+                                            } else {
+                                                alert(
+                                                    'digite um Numero para coleta'
+                                                )
+                                            }
+                                        }}
                                     />
                                 </div>
                             </>

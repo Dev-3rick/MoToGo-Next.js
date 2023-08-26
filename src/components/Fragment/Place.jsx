@@ -22,6 +22,7 @@ const Place = ({ setSelected, label }) => {
         clearSuggestions,
     } = usePlacesAutocomplete({
         requestOptions: {
+            types: ['street_address'],
             locationBias: {
                 radius: 100,
                 center: { lat: -19.9369, lng: -43.4722 },
@@ -30,12 +31,12 @@ const Place = ({ setSelected, label }) => {
     })
 
     const handleSelect = async (address) => {
-        setValue(address, false)
+        let streetName = address.split('-')[0]
+        streetName = setValue(streetName, false)
         clearSuggestions()
-        console.log(address)
-        const results = await getGeocode({ address })
-        const { lat, lng } = await getLatLng(results[0])
-        setSelected(address, { lat, lng })
+        alert(address)
+
+        setSelected(address)
     }
 
     return (
@@ -53,12 +54,10 @@ const Place = ({ setSelected, label }) => {
                     <ComboboxList>
                         {status === 'OK' &&
                             data.map(({ place_id, description }) => {
-                                const streetName = description.split('-')[0]
-                                console.log(JSON.stringify(description))
                                 return (
                                     <ComboboxOption
                                         key={place_id}
-                                        value={streetName}
+                                        value={description}
                                     />
                                 )
                             })}
