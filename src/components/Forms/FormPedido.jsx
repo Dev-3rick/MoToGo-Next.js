@@ -104,11 +104,6 @@ const FormPedido = ({ onSubmit }) => {
                             src="./ImgApp/Caixa.png"
                             alt="icons"
                         />
-                        {distanceInfo ? (
-                            <p>{distanceInfo.duration}</p>
-                        ) : (
-                            <p>av</p>
-                        )}
                         {mostrarEntrega ? (
                             <>
                                 <h1 className="font-bold text-center pb-5  text-4xl">
