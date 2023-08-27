@@ -4,6 +4,7 @@ import usePlacesAutocomplete, {
     getGeocode,
     getLatLng,
 } from 'use-places-autocomplete'
+
 import {
     Combobox,
     ComboboxInput,
@@ -11,22 +12,26 @@ import {
     ComboboxList,
     ComboboxOption,
 } from '@reach/combobox'
+
 import '@reach/combobox/styles.css'
 
 const Place = ({ setSelected, label }) => {
     const {
         ready,
         value,
-        setValue,
         suggestions: { status, data },
+        setValue,
         clearSuggestions,
     } = usePlacesAutocomplete({
         requestOptions: {
-            types: ['street_address'],
-            locationBias: {
-                radius: 100,
-                center: { lat: -19.9369, lng: -43.4722 },
+            locationRestriction: {
+                center: {
+                    lat: -19.9369,
+                    lng: -43.4722,
+                },
+                radius: 2000,
             },
+            types: ['address'],
         },
     })
 
@@ -45,7 +50,10 @@ const Place = ({ setSelected, label }) => {
             <Combobox onSelect={handleSelect}>
                 <ComboboxInput
                     value={value}
-                    onChange={(e) => setValue(e.target.value)}
+                    onChange={(e) => {
+                        setValue(e.target.value)
+                        console.log(data, e.target.value)
+                    }}
                     disabled={!ready}
                     className=" shadow- p-3 rounded-md border border-zinc-400 bg-zinc-100 w-full outline-none"
                     placeholder="Search an address"
@@ -54,6 +62,7 @@ const Place = ({ setSelected, label }) => {
                     <ComboboxList>
                         {status === 'OK' &&
                             data.map(({ place_id, description }) => {
+                                console.log(data)
                                 return (
                                     <ComboboxOption
                                         key={place_id}

@@ -25,14 +25,17 @@ const FormPedido = ({ onSubmit }) => {
         const logradouroColetaComNumeor = logradouroColeta.split('-')[0]
         const newStreetName = logradouroColetaComNumeor.replace(
             '-',
-            ' - ' + variavel
+            ' - ' + numero
         )
-        console.log(numeroColeta)
+        console.log(newStreetName)
 
         const results = await getGeocode({ address })
         const { lat, lng } = await getLatLng(results[0])
 
-        const service = new google.maps.DistanceMatrixService()
+        const service = new google.maps.DistanceMatrixService(
+            logradouro,
+            numeroColeta
+        )
         const distanceCallback = service.getDistanceMatrix(
             {
                 origins: [originLatLng],
