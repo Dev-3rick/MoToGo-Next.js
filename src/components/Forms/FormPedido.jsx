@@ -21,48 +21,61 @@ const FormPedido = ({ onSubmit }) => {
         duration: null,
     })
 
-    async function DistanceMatrix(logradouro, numero) {
-        const logradouroColetaComNumeor = logradouroColeta.split('-')[0]
-        const newStreetName = logradouroColetaComNumeor.replace(
-            '-',
-            ' - ' + numero
-        )
-        console.log(newStreetName)
+    async function concatenacaoDistanceMatrix(
+        logradouroOrigin,
+        numeroOrigin,
+        logradouroDestinations,
+        numeroDestinations
+    ) {
+        const logradouroColetaComNumero = logradouroOrigin.split(' - ')[0]
+        const newStreetNameColeta = `${logradouroColetaComNumero} , ${numeroOrigin} - ${
+            logradouroOrigin.split(' - ')[1]
+        }`
 
-        const results = await getGeocode({ address })
-        const { lat, lng } = await getLatLng(results[0])
+        const logradouroDestinationsComNumero =
+            logradouroDestinations.split(' - ')[0]
+        const newStreetNameDestinations = `${logradouroDestinationsComNumero} , ${numeroDestinations} - ${
+            logradouroDestinations.split(' - ')[1]
+        }`
 
-        const service = new google.maps.DistanceMatrixService(
-            logradouro,
-            numeroColeta
-        )
-        const distanceCallback = service.getDistanceMatrix(
+        DistanceMatrix(newStreetNameColeta, newStreetNameDestinations)
+    }
+
+    async function DistanceMatrix(origin, destination) {
+        const service = new google.maps.DistanceMatrixService()
+
+        service.getDistanceMatrix(
             {
-                origins: [originLatLng],
-                destinations: [destinationLatLng],
+                origins: [origin],
+                destinations: [destination],
                 travelMode: 'DRIVING',
             },
             callback
         )
+    }
 
-        function callback(response, status) {
-            if (status == 'OK') {
-                var origins = response.originAddresses
-                var destinations = response.destinationAddresses
-
-                console.log(JSON.stringify(destinations))
-                console.log(JSON.stringify(response))
-            }
+    function callback(response, status) {
+        if (status === 'OK') {
+            const distance = response.rows[0].elements[0].distance.text
+            const duration = response.rows[0].elements[0].duration.text
+            setDistanceInfo({ distance, duration })
+            console.log({ distance, duration })
+        } else {
+            console.log('Erro ao obter a matriz de distância:', status)
         }
-
-        return distanceCallback
     }
 
     const FormPedidoSubmit = (event) => {
         event.preventDefault()
 
         if (numeroColeta && numeroEntrega) {
-            setDistanceInfo(DistanceMatrix(logradouroColeta, logradouroEntrega))
+            concatenacaoDistanceMatrix(
+                logradouroColeta,
+                numeroColeta,
+                logradouroEntrega,
+                numeroEntrega,
+                setDistanceInfo
+            )
             onSubmit({
                 logradouroColeta,
                 numeroColeta,
@@ -74,7 +87,6 @@ const FormPedido = ({ onSubmit }) => {
                 referenciaEntrega,
                 distanceInfo,
             })
-            setMostrarEntrega((mostrarEntrega) => !mostrarEntrega)
         } else {
             alert('digite um Numero para Entrega')
         }
@@ -192,7 +204,7 @@ const FormPedido = ({ onSubmit }) => {
                                 </div>{' '}
                                 <Button
                                     color="bg-[#008AFF]/60 "
-                                    text="Continuar"
+                                    text="Continsuar"
                                     type="submit"
                                     className="mt-6"
                                 />{' '}

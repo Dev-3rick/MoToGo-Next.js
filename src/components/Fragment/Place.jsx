@@ -39,7 +39,6 @@ const Place = ({ setSelected, label }) => {
         let streetName = address.split('-')[0]
         streetName = setValue(streetName, false)
         clearSuggestions()
-        alert(address)
 
         setSelected(address)
     }
