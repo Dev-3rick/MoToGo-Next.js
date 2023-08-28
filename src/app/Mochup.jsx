@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import PageLogin from './PageLogin'
 import PagePedido from '@/app/PagePedido'
+import PageSucess from './PageSucess'
 
 const Mochup = () => {
     const [type, setType] = useState('cadastrso')
@@ -14,7 +15,7 @@ const Mochup = () => {
                 className="absolute -top-4  h-[782px] w-[480px] z-[-1] "
             ></img>
 
-            {type == 'cadastro' ? <PageLogin /> : <PagePedido />}
+            {type == 'cadastrso' ? <PageSucess /> : <PagePedido />}
         </div>
     )
 }
