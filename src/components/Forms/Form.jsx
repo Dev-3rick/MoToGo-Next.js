@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react'
 import Input from '../Fragment/Input'
 import Button from '../Fragment/Button'
 
-const Form = () => {
+const Form = ({ onclick }) => {
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
     const [user, setUser] = useState(null)
 
     const submit = (event) => {
         event.preventDefault()
+        console.log(user)
+        onclick(user)
     }
 
     return (
