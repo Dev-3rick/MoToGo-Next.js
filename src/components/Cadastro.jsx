@@ -1,18 +1,15 @@
 import React from 'react'
+import FormData from './Forms/FormData'
 
 const Cadastro = () => {
     return (
         <div className="bg">
             <img
                 src="./ImgApp/Union.png"
-                className="absolute z-[-1] top-0 left-0"
+                className="absolute z-[-2] top-0 left-0"
             ></img>{' '}
-            <img
-                src="./ImgApp/Delivery-service-Orange (4) 2.png"
-                className="z-[-0]"
-            />
-            <h1 className="font-bold text-center text-4xl">MotoGo</h1>
-            <span className="mt-1 mb-5 text-center">Cadastre-se</span>
+            <img src="./ImgApp/Formulario.png" className="z-[-0] pt-2" />
+            <h1 className="font-bold text-center text-4xl">Usuario</h1>
             <FormData />
         </div>
     )

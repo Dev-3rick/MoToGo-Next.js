@@ -7,6 +7,7 @@ const FormData = () => {
     const [sobrenome, setSobrenome] = React.useState('')
     const [senha, setSenha] = React.useState('')
     const [tel, setTel] = React.useState('')
+    const [email, setEmail] = React.useState('')
 
     const clientData = () => {
         event.preventDefault()
@@ -55,7 +56,6 @@ const FormData = () => {
                     type="submit"
                 />
             </div>
-            {/* <Button color="bg-[#008AFF]/60 " text="Cadastrar" /> */}
         </form>
     )
 }
