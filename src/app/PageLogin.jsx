@@ -1,6 +1,8 @@
 import React from 'react'
 import Form from '@/components/Forms/Form'
 import PageSignupClient from './PageSignupClient'
+import Button from '@/components/Fragment/Button'
+import Cadastro from '@/components/Cadastro'
 
 const PageLogin = () => {
     const [optionClient, setOptionClient] = React.useState('')
@@ -9,6 +11,8 @@ const PageLogin = () => {
         <div>
             {optionClient === 'Cliente' ? (
                 <PageSignupClient />
+            ) : optionClient === 'Cadastre - se' ? (
+                <Cadastro />
             ) : (
                 <>
                     <img
@@ -17,7 +21,12 @@ const PageLogin = () => {
                     ></img>
                     <img src="./ImgApp/Motoboy.png " className="z-[-0]" />
                     <h1 className="font-bold text-center  text-4xl">MotoGo</h1>
-                    <span className=" mb-5 block text-center">Cadastre-se</span>
+                    <Button
+                        text={'Cadastre - se'}
+                        className={' mb-5 block text-center '}
+                        type={'button'}
+                        setClick={setOptionClient}
+                    />{' '}
                     <Form onclick={setOptionClient} />
                 </>
             )}
