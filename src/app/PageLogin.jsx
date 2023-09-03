@@ -1,8 +1,9 @@
 import React from 'react'
 import Form from '@/components/Forms/Form'
-import PageSignupClient from './PageSignupClient'
+
 import Button from '@/components/Fragment/Button'
 import Cadastro from '@/components/Cadastro'
+import PagePedido from './PagePedido'
 
 const PageLogin = () => {
     const [optionClient, setOptionClient] = React.useState('')
@@ -10,7 +11,7 @@ const PageLogin = () => {
     return (
         <div>
             {optionClient === 'Cliente' ? (
-                <PageSignupClient />
+                <PagePedido />
             ) : optionClient === 'Cadastre - se' ? (
                 <Cadastro />
             ) : (
