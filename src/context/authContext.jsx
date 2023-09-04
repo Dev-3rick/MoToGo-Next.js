@@ -21,7 +21,7 @@ const AuthProvider = ({ children }) => {
                 router.push('entregador')
             }
         } catch (err) {
-            if (err.response.status == '401') {
+            if (err?.response?.status == '401') {
                 setNotAuthorized(true)
                 setUser(null)
                 setTimeout(() => {

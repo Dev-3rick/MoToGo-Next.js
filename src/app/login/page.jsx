@@ -1,13 +1,12 @@
 'use client'
-import React from 'react'
+import React, { useState } from 'react'
 import Form from '@/components/Forms/Form'
-
+import { useRouter } from 'next/navigation'
 import Button from '@/components/Fragment/Button'
-import { useState } from 'react'
 
 const Login = () => {
     const [optionClient, setOptionClient] = useState(null)
-
+    const router = useRouter()
     return (
         <div>
             <img
@@ -20,7 +19,7 @@ const Login = () => {
                 text={'Cadastre - se'}
                 className={' mb-5 block text-center '}
                 type={'button'}
-                setClick={setOptionClient}
+                setClick={() => router.push('cadastro')}
             />{' '}
             <Form onclick={setOptionClient} />
         </div>
