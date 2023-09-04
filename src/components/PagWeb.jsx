@@ -1,7 +1,8 @@
 import React from 'react'
 import Nav from './Nav'
+import Mochup from './Mochup'
 
-const PagWeb = () => {
+const PagWeb = ({ children }) => {
     return (
         <>
             <Nav />
@@ -19,6 +20,7 @@ const PagWeb = () => {
                     src="./ImgApp/Group 8.17.png"
                 ></img>
             </div>
+            {children}
         </>
     )
 }

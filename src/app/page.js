@@ -1,13 +1,9 @@
 'use client'
-import React, { useState } from 'react'
-import Mochup from './Mochup.jsx'
-import PagWeb from '../components/PagWeb.jsx'
+import { useRouter } from 'next/navigation'
 
-export default function Home() {
-    return (
-        <div className=" pt-[100px] h-screen flex justify-center items-center bg-orange/60">
-            <PagWeb />
-            <Mochup />
-        </div>
-    )
+const page = () => {
+    const router = useRouter()
+    return router.push('/login')
 }
+
+export default page

@@ -1,6 +1,6 @@
 import React from 'react'
 
-const PageSucess = () => {
+const Sucesso = () => {
     return (
         <div>
             <img
@@ -18,4 +18,4 @@ const PageSucess = () => {
     )
 }
 
-export default PageSucess
+export default Sucesso

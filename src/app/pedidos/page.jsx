@@ -1,8 +1,9 @@
+'use client'
 import React from 'react'
 
-import FormPedido from '../components/Forms/FormPedido'
+import FormPedido from '../../components/Forms/FormPedido'
 
-const PagePedido = () => {
+const Pedidos = () => {
     const [DataPedito, setDataPedido] = React.useState({})
     return (
         <div className="h-full w-[335px] rounded-[40px] ">
@@ -19,4 +20,4 @@ const PagePedido = () => {
     )
 }
 
-export default PagePedido
+export default Pedidos

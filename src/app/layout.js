@@ -1,5 +1,8 @@
 import '../styles/globals.css'
 import { Inter } from 'next/font/google'
+import { AuthProvider } from '@/context/authContext'
+import PagWeb from '@/components/PagWeb'
+import Mochup from '@/components/Mochup'
 
 const inter = Inter({ subsets: ['latin'] })
 export function initMap() {
@@ -20,7 +23,16 @@ export default function RootLayout({ children }) {
                 ></script>
             </head>
             <html lang="en">
-                <body>{children}</body>
+                <body>
+                    <AuthProvider>
+                        <PagWeb>
+                            <Mochup>
+
+                                {children}
+                            </Mochup>
+                        </PagWeb>
+                    </AuthProvider>
+                </body>
             </html>
         </>
     )

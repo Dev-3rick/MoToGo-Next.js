@@ -1,9 +1,7 @@
+'use client'
 import React, { useState } from 'react'
-import PageLogin from './PageLogin'
-import PagePedido from '@/app/PagePedido'
-import PageSucess from './PageSucess'
 
-const Mochup = () => {
+const Mochup = ({ children }) => {
     const [type, setType] = useState('')
     return (
         <div
@@ -14,7 +12,7 @@ const Mochup = () => {
                 src="./ImgApp/apple-iphone-13-pro-max-2021-medium.png"
                 className="absolute -top-4  h-[782px] w-[480px] z-[-1] "
             ></img>
-            <PageLogin />
+            {children}
         </div>
     )
 }
