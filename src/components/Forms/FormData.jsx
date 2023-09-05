@@ -2,11 +2,10 @@ import React, { useState, useContext } from 'react'
 import Input from '../Fragment/Input'
 import Button from '../Fragment/Button'
 import axios from 'axios' // Importe a biblioteca axios para fazer a solicitação HTTP
-import { AuthContext, } from '@/context/authContext'
+import { AuthContext } from '@/context/authContext'
 
 const FormData = () => {
-
-    const { registerUser, showToaster } = useContext(AuthContext)
+    const { registerUser } = useContext(AuthContext)
 
     const [nome, setNome] = useState('')
     const [senha, setSenha] = useState('')
@@ -15,24 +14,28 @@ const FormData = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault()
+        console.log(nome, email, senha, tel)
+        const data = {
+            nome: nome,
+            email: email,
+            senha: senha,
+            telefone: tel,
+        }
 
-        registerUser(nome, email, senha, tel)
-
-    //     try {
-    //         // Faça uma solicitação POST para o servidor para cadastrar o usuário
-    //         const response = await registerUser(dados)
-
-    //         // Verifique a resposta do servidor e trate-a conforme necessário
-    //         if (response.status === 201) {
-    //             // O usuário foi cadastrado com sucesso
-    //             showToaster('Usuário cadastrado com sucesso')
-    //         } else {
-    //             // Ocorreu um erro no servidor
-    //             showToaster('Erro ao cadastrar o usuário')
-    //         }
-    //     } catch (error) {
-    //         showToaster('Erro ao enviar a solicitação:', error)
-    //     }
+        try {
+            // Faça uma solicitação POST para o servidor para cadastrar o usuário
+            const response = await registerUser(data)
+            // Verifique a resposta do servidor e trate-a conforme necessário
+            if (response.status === 201) {
+                // O usuário foi cadastrado com sucesso
+                showToaster('Usuário cadastrado com sucesso')
+            } else {
+                // Ocorreu um erro no servidor
+                showToaster('Erro ao cadastrar o usuário')
+            }
+        } catch (error) {
+            console.error('Erro ao enviar a solicitação:', error)
+        }
     }
 
     return (

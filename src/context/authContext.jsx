@@ -17,7 +17,6 @@ const AuthProvider = ({ children }) => {
         tag: '',
     })
 
-
     // Função que verifica se o usuário tem acesso
     const login = async (data) => {
         try {
@@ -38,13 +37,11 @@ const AuthProvider = ({ children }) => {
             }
         }
     }
-
-    const registerUser = async (name, email, senha, telefone) => {
-        const values = { name, email, telefone, senha }
-        await api
-            .post('/register', values)
-            .then((response) => {
-                if (response.status !== 201) return
+    const registerUser = async (data) => {
+        console.log(data)
+        try {
+            const response = await api.post('/register', data)
+            if (response.status === 201) {
                 setShowToaster({
                     status: true,
                     message: 'Conta criada com sucesso',
@@ -58,20 +55,19 @@ const AuthProvider = ({ children }) => {
                     })
                     router.push('/login')
                 }, 2000)
-            })
-            .catch((error) => {
-                setErrorReq(error?.response?.data?.message)
-                setTimeout(() => {
-                    setErrorReq('')
-                }, 2000)
-            })
+            }
+        } catch (error) {
+            setErrorReq(error?.response?.data?.message)
+            setTimeout(() => {
+                setErrorReq('')
+            }, 2000)
+        }
     }
 
     const values = {
         login,
         user,
         registerUser,
-
     }
 
     return (
