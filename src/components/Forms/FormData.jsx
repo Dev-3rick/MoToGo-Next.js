@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react'
 import Input from '../Fragment/Input'
 import Button from '../Fragment/Button'
-
 import { AuthContext } from '@/context/authContext'
 
 const FormData = () => {
