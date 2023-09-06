@@ -10,7 +10,6 @@ const Form = ({ onclick }) => {
     const [user, setUser] = useState(null)
 
     const { login, error } = useAuth()
-    console.log('🚀 ~ error:', error)
 
     const data = {
         email,
@@ -44,7 +43,7 @@ const Form = ({ onclick }) => {
                     setValue={setSenha}
                 />
 
-                <Toast className="p-2 mt-2 text-white bg-red-200 rounded-md z-50" />
+                <Toast />
 
                 <div className="flex gap-1 items-center  mt-5  mb-8">
                     <Button

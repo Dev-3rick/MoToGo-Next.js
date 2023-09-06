@@ -1,13 +1,15 @@
 import React from 'react'
 import useAuth from '@/hooks/useAuth'
 
-const Toast = ({ className }) => {
-    const { error } = useAuth()
+const Toast = () => {
+    const { response } = useAuth()
     return (
-        error &&
-        error.status && (
-            <div className={`text-sm  ${className}`}>
-                <h1>{error.message}</h1>
+        response &&
+        response.status && (
+            <div
+                className={`text-sm  p-2 mt-2 text-white bg-red-200 rounded-md z-50`}
+            >
+                <h1>{response.message}</h1>
             </div>
         )
     )

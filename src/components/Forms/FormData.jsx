@@ -2,9 +2,10 @@ import React, { useState, useContext } from 'react'
 import Input from '../Fragment/Input'
 import Button from '../Fragment/Button'
 import { AuthContext } from '@/context/authContext'
+import Toast from '../Toast'
 
 const FormData = () => {
-    const { registerUser } = useContext(AuthContext)
+    const { registerUser, setResponse } = useContext(AuthContext)
 
     const [nome, setNome] = useState('')
     const [senha, setSenha] = useState('')
@@ -13,7 +14,6 @@ const FormData = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault()
-        console.log(nome, email, senha, tel)
         const data = {
             nome: nome,
             email: email,
@@ -21,19 +21,17 @@ const FormData = () => {
             telefone: tel,
         }
 
-        try {
-            // Faça uma solicitação POST para o servidor para cadastrar o usuário
-            const response = await registerUser(data)
-            // Verifique a resposta do servidor e trate-a conforme necessário
-            if (response.status === 201) {
-                // O usuário foi cadastrado com sucesso
-                showToaster('Usuário cadastrado com sucesso')
-            } else {
-                // Ocorreu um erro no servidor
-                showToaster('Erro ao cadastrar o usuário')
-            }
-        } catch (error) {
-            console.error('Erro ao enviar a solicitação:', error)
+        if (data && data.email && data.senha && data.telefone) {
+            registerUser(data)
+            console.log('ok')
+        } else {
+            setResponse({
+                status: true,
+                message: 'Dados incompletos',
+            })
+            setTimeout(() => {
+                setResponse(null)
+            }, 3000)
         }
     }
 
@@ -58,8 +56,7 @@ const FormData = () => {
                 placeholder={'E-mail'}
                 value={email}
                 setValue={setEmail}
-                type={'text'}
-                error={!email.includes('@')}
+                type={'email'}
             />
             <Input
                 id={`tel`}
@@ -79,6 +76,7 @@ const FormData = () => {
                 type={'password'}
                 error={senha.length < 6}
             />
+            <Toast />
             <div className="w-2/3 mx-auto mt-4 ">
                 <Button
                     text="Cadastrar"
