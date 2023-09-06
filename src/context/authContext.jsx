@@ -7,28 +7,20 @@ const AuthContext = createContext({})
 
 const AuthProvider = ({ children }) => {
     const router = useRouter()
-
-    const [errorReq, setErrorReq] = useState('')
     const [user, setUser] = useState(null)
     const [notAuthorized, setNotAuthorized] = useState(null)
-    const [showToaster, setShowToaster] = useState({
-        status: false,
-        message: '',
-        tag: '',
-    })
 
-    // Função que verifica se o usuário tem acesso
     const login = async (data) => {
         try {
-            const response = await api.post('login', data)
-            setUser(response.data)
-            if (response.data.usuarioTipoID == 1) {
+            const res = await api.post('login', data)
+            setUser(res.data)
+            if (res.data.usuarioTipoID == 1) {
                 router.push('cliente')
-            } else if (response.data.usuarioTipoID == 2) {
+            } else if (res.data.usuarioTipoID == 2) {
                 router.push('entregador')
             }
         } catch (err) {
-            if (err?.response?.status == '401') {
+            if (err?.res?.status == '401') {
                 setNotAuthorized(true)
                 setUser(null)
                 setTimeout(() => {
@@ -37,31 +29,36 @@ const AuthProvider = ({ children }) => {
             }
         }
     }
+
+    const [errorReq, setErrorReq] = useState('')
+    const [showToaster, setShowToaster] = useState({})
     const registerUser = async (data) => {
-        console.log(data)
         try {
-            const response = await api.post('/register', data)
-            if (response.status === 201) {
+            const res = await api.post('/register', data)
+            if (res.status === 201) {
                 setShowToaster({
-                    status: true,
+                    status: res.status,
                     message: 'Conta criada com sucesso',
                     tag: 'success',
                 })
-                setTimeout(() => {
-                    setShowToaster({
-                        status: false,
-                        message: '',
-                        tag: '',
-                    })
-                    router.push('/login')
-                }, 2000)
+                // setTimeout(() => {
+                //     setShowToaster({
+                //         status: null,
+                //         message: '',
+                //         tag: '',
+                //     })
+                // }, 2000)
             }
+            router.push('/login')
         } catch (error) {
-            setErrorReq(error?.response?.data?.message)
+            setErrorReq(error?.res?.data?.message)
             setTimeout(() => {
                 setErrorReq('')
             }, 2000)
+        } finally {
         }
+
+        return showToaster
     }
 
     const values = {

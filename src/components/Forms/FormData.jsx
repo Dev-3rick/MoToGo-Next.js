@@ -11,6 +11,7 @@ const FormData = () => {
     const [senha, setSenha] = useState('')
     const [tel, setTel] = useState('')
     const [email, setEmail] = useState('')
+    const [showToaster, setShowToaster] = useState({})
 
     const handleSubmit = async (event) => {
         event.preventDefault()
@@ -20,21 +21,25 @@ const FormData = () => {
             email: email,
             senha: senha,
             telefone: tel,
+            usuarioTipoID: 1,
         }
 
         try {
             // Faça uma solicitação POST para o servidor para cadastrar o usuário
-            const response = await registerUser(data)
+            const res = await registerUser(data)
+            // Atualize o estado local showToaster com o objeto retornado por registerUser
+            setShowToaster(res)
+            console.log(res)
             // Verifique a resposta do servidor e trate-a conforme necessário
-            if (response.status === 201) {
+            if (res.status === 201) {
                 // O usuário foi cadastrado com sucesso
-                showToaster('Usuário cadastrado com sucesso')
+                console.log('Usuário cadastrado com sucesso')
             } else {
                 // Ocorreu um erro no servidor
-                showToaster('Erro ao cadastrar o usuário')
+                console.log('Erro ao cadastrar o usuário')
             }
         } catch (error) {
-            console.error('Erro ao enviar a solicitação:', error)
+            console.log('Erro ao enviar a solicitação:', error)
         }
     }
 
@@ -87,6 +92,12 @@ const FormData = () => {
                     type="submit"
                 />
             </div>
+            {/* Exiba a mensagem do toaste com base nos valores de showToaster */}
+            {showToaster.status && (
+                <div className={`toaster toaster-${showToaster.tag}`}>
+                    {showToaster.message}
+                </div>
+            )}
         </form>
     )
 }

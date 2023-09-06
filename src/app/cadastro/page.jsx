@@ -1,7 +1,6 @@
 'use client'
 import React from 'react'
 import FormData from '@/components/Forms/FormData'
-import { useRouter } from 'next/navigation'
 
 const Cadastro = () => {
     return (
