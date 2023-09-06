@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react'
 import Input from '../Fragment/Input'
 import Button from '../Fragment/Button'
 import useAuth from '@/hooks/useAuth'
+import Toast from '../Toast'
 
 const Form = ({ onclick }) => {
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
     const [user, setUser] = useState(null)
 
-    const { login } = useAuth()
+    const { login, error } = useAuth()
+    console.log('🚀 ~ error:', error)
 
     const data = {
         email,
@@ -42,6 +44,8 @@ const Form = ({ onclick }) => {
                     setValue={setSenha}
                 />
 
+                <Toast className="p-2 mt-2 text-white bg-red-200 rounded-md z-50" />
+
                 <div className="flex gap-1 items-center  mt-5  mb-8">
                     <Button
                         text="Entregador"
@@ -56,6 +60,7 @@ const Form = ({ onclick }) => {
                         setClick={setUser}
                     />
                 </div>
+
                 <div className="w-2/3 mx-auto ">
                     <Button
                         text="Continuar"
