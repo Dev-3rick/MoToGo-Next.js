@@ -38,6 +38,7 @@ const AuthProvider = ({ children }) => {
             const response = await api.post('register', data)
             router.push('login')
         } catch (response) {
+            console.log(response)
             if (response.response.status == '401') {
                 setResponse({
                     status: true,
