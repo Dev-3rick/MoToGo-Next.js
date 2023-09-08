@@ -29,13 +29,10 @@ const Cliente = () => {
 
                 <div className=" pt-20 ">
                     <img
-                        src="./ImgApp/Hero.png"
+                        src="./ImgApp/elementosAzuis.png"
                         className="absolute z-[-2] w-full right-4 top-3"
                     />
-                    <img
-                        src="./ImgApp/Product Return 1.png"
-                        className="z-[-0] m-auto"
-                    />
+                    <img src="./ImgApp/Caixa.png" className="z-[-0] m-auto" />
                 </div>
                 <div className="flex flex-col gap-2 items-center ">
                     <img
@@ -51,19 +48,26 @@ const Cliente = () => {
                         className="absolute z-[-2]   w-[365px] h-[365px]"
                     />
                     <div class="flex flex-col  justify-center   text-white">
-                        <h1 class="font-bold text-4xl p-2 text-center">
-                            Solicite uma entrega{' '}
+                        <h1 class="font-bold mx-4 text-4xl  text-center">
+                            Solicite uma entrega
                         </h1>
-                        <span class="text-center mt-10">
+                        <span class="text-center mt-7">
                             Use cupom para seu primeiro pedido:
                             <strong className="text-orange uppercase ">
                                 {' '}
                                 MoToGo2023
                             </strong>
-                            <div className="w-40 mt-10 m-auto">
+                            <div className=" mt-10 m-auto w-auto  gap-3 flex justify-center items-center">
                                 <Button
                                     text="Novo Pedido"
                                     color="bg-[#0086FF] "
+                                    className="p-3 w-min whitespace-nowrap"
+                                    setClick={() => router.push('pedido')}
+                                />{' '}
+                                <Button
+                                    text="Ver Pedidos"
+                                    color="bg-[#0086FF] "
+                                    className="p-3 w-min whitespace-nowrap"
                                 />
                             </div>
                         </span>
