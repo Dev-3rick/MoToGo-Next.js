@@ -62,7 +62,7 @@ const Cliente = () => {
                                     text="Novo Pedido"
                                     color="bg-[#0086FF] "
                                     className="p-3 w-min whitespace-nowrap"
-                                    setClick={() => router.push('pedido')}
+                                    // setClick={() => router.push('pedido')}
                                 />{' '}
                                 <Button
                                     text="Ver Pedidos"

@@ -1,9 +1,16 @@
 'use client'
-import { useRouter } from 'next/navigation'
+import React, { useEffect } from 'react'
 
 const page = () => {
-    const router = useRouter()
-    return router.push('/login')
+    const handleRedirect = () => {
+        window.location.href = '/login'
+    }
+
+    useEffect(() => {
+        handleRedirect()
+    }, [])
+
+    return null
 }
 
 export default page
