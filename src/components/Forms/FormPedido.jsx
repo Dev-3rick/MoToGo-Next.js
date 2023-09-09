@@ -109,10 +109,7 @@ const FormPedido = ({ onSubmit }) => {
                                 <h1 className="font-bold text-center pb-5  text-4xl">
                                     Coleta
                                 </h1>
-                                <Place
-                                    label="Logadouro "
-                                    setSelected={setLogradouroColeta}
-                                />
+                                <Place />
                                 <Input
                                     id="nColeta"
                                     label="Numero"
