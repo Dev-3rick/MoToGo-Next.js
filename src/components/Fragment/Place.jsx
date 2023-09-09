@@ -1,6 +1,9 @@
 import React from 'react'
 
-import usePlacesAutocomplete from 'use-places-autocomplete'
+import usePlacesAutocomplete, {
+    getGeocode,
+    getLatLng,
+} from 'use-places-autocomplete'
 
 import {
     Combobox,
