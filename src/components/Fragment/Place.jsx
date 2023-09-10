@@ -5,15 +5,22 @@ import usePlacesAutocomplete, {
     getLatLng,
 } from 'use-places-autocomplete'
 
-import {
-    Combobox,
-    ComboboxInput,
-    ComboboxPopover,
-    ComboboxList,
-    ComboboxOption,
-} from '@reach/combobox'
+import { Check, ChevronsUpDown } from 'lucide-react'
 
-import '@reach/combobox/styles.css'
+import { cn } from '@/lib/utils'
+import { Button } from '@/components/ui/popover'
+import {
+    Command,
+    CommandEmpty,
+    CommandGroup,
+    CommandInput,
+    CommandItem,
+} from '@/components/ui/command'
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from '@/components/ui/popover'
 
 const Place = ({ setSelected, label }) => {
     const {
@@ -45,33 +52,30 @@ const Place = ({ setSelected, label }) => {
 
     return (
         <>
-            <label className="text-[#52525C]">{label}</label>
-            <Combobox onSelect={handleSelect}>
-                <ComboboxInput
-                    value={value}
-                    onChange={(e) => {
-                        setValue(e.target.value)
-                        console.log(data, e.target.value)
-                    }}
-                    disabled={!ready}
-                    className=" shadow- p-3 rounded-md border border-zinc-400 bg-zinc-100 w-full outline-none"
-                    placeholder="Search an address"
-                />
-                <ComboboxPopover>
-                    <ComboboxList>
-                        {status === 'OK' &&
-                            data.map(({ place_id, description }) => {
-                                console.log(data)
-                                return (
-                                    <ComboboxOption
-                                        key={place_id}
-                                        value={description}
-                                    />
-                                )
-                            })}
-                    </ComboboxList>
-                </ComboboxPopover>
-            </Combobox>
+            <label className="text-[#52525C] mb-10">{label}</label>
+            <Command
+                onChange={(e) => {
+                    setValue(e.target.value)
+                    console.log(data, e.target.value)
+                }}
+                value={value}
+            >
+                <CommandInput value={value} />
+
+                {status === 'OK' && (
+                    <CommandGroup>
+                        {data.map(({ place_id, description }) => (
+                            <CommandItem
+                                key={place_id}
+                                value={description}
+                                onSelect={handleSelect}
+                            >
+                                {description}
+                            </CommandItem>
+                        ))}
+                    </CommandGroup>
+                )}
+            </Command>
         </>
     )
 }
