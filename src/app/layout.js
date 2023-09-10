@@ -1,3 +1,4 @@
+'use client'
 import '../styles/globals.css'
 import { Inter } from 'next/font/google'
 import { AuthProvider } from '@/context/authContext'
@@ -15,12 +16,6 @@ export default function RootLayout({ children }) {
     return (
         <>
             <head>
-                {' '}
-                <script>
-                    {function initMap() {
-                        console.log('123')
-                    }}
-                </script>
                 <script
                     async
                     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC9kWuM0oCoy6PsyhIsykG3XNRNZ2HIoe4&libraries=places"
