@@ -66,6 +66,12 @@ const FormPedido = ({ onSubmit }) => {
     }
 
     const FormPedidoSubmit = (event) => {
+        const data = {
+            logradouroColeta,
+            email: email,
+            senha: senha,
+            telefone: tel,
+        }
         event.preventDefault()
 
         if (numeroColeta && numeroEntrega) {
