@@ -168,9 +168,6 @@ const FormPedido = ({ onSubmit }) => {
                                 <h1 className="font-bold text-center pb-5  text-4xl">
                                     Entrega
                                 </h1>{' '}
-                                <label className="text-[#52525C]">
-                                    Logadouro
-                                </label>
                                 <Place
                                     setSelected={setLogradouroEntrega}
                                     label="Logadouro"
