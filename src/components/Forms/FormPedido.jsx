@@ -6,7 +6,6 @@ import useAuth from '@/hooks/useAuth'
 
 const FormPedido = ({ onSubmit }) => {
     const [mostrarEntrega, setMostrarEntrega] = React.useState(true)
-
     const [logradouroColeta, setLogradouroColeta] = React.useState('')
     const [numeroColeta, setNumeroColeta] = React.useState('')
     const [referenciaColeta, setReferenciaColeta] = React.useState('')
@@ -22,8 +21,6 @@ const FormPedido = ({ onSubmit }) => {
         duration: null,
     })
 
-    const EndEntregaCompleto = null
-    const EdnColetaCompleto = null
     async function concatenacaoDistanceMatrix(
         logradouroOrigin,
         numeroOrigin,
@@ -40,9 +37,9 @@ const FormPedido = ({ onSubmit }) => {
             logradouroDestination.split(' - ')[1]
         }`
 
-        DistanceMatrix(EdnColetaCompleto, EndEntregaCompleto)
+        return EdnColetaCompleto, EndEntregaCompleto
     }
-
+    DistanceMatrix(EdnColetaCompleto, EndEntregaCompleto)
     async function DistanceMatrix(origin, destination) {
         const service = new google.maps.DistanceMatrixService()
 
@@ -68,26 +65,26 @@ const FormPedido = ({ onSubmit }) => {
     }
     const { user } = useAuth()
     const FormPedidoSubmit = (event) => {
-        const data = {
-            user,
-            endColeta: EdnColetaCompleto,
-            endEntrega: EndEntregaCompleto,
-            tempo: 45.5,
-            distance,
-            duration,
-            obsEntrega: 'Observação da Entrega',
-            obsColeta: 'Observaçãdta',
-            pgt: 1,
-            tabelaPreco: 1,
-        }
-
         if (numeroColeta && numeroEntrega) {
-            concatenacaoDistanceMatrix(
-                logradouroColeta,
-                numeroColeta,
-                logradouroEntrega,
-                numeroEntrega
-            )
+            const { EdnColetaCompleto, EndEntregaCompleto } =
+                concatenacaoDistanceMatrix(
+                    logradouroColeta,
+                    numeroColeta,
+                    logradouroEntrega,
+                    numeroEntrega
+                )
+            const data = {
+                user,
+                endColeta: EdnColetaCompleto,
+                endEntrega: EndEntregaCompleto,
+                tempo: 45.5,
+                distance,
+                duration,
+                obsEntrega: 'Observação da Entrega',
+                obsColeta: 'Observaçãdta',
+                pgt: 1,
+                tabelaPreco: 1,
+            }
         } else {
             alert('digite um Numero para Entrega')
         }
