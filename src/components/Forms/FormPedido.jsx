@@ -2,14 +2,15 @@ import React from 'react'
 import Input from '../Fragment/Input'
 import Button from '../Fragment/Button'
 import Place from '../Fragment/Place'
+import useAuth from '@/hooks/useAuth'
 
 const FormPedido = ({ onSubmit }) => {
     const [mostrarEntrega, setMostrarEntrega] = React.useState(true)
 
     const [logradouroColeta, setLogradouroColeta] = React.useState('')
     const [numeroColeta, setNumeroColeta] = React.useState('')
-    const [obsColeta, setObsColeta] = React.useState('')
     const [referenciaColeta, setReferenciaColeta] = React.useState('')
+    const [obsColeta, setObsColeta] = React.useState('')
 
     const [logradouroEntrega, setLogradouroEntrega] = React.useState('')
     const [numeroEntrega, setNumeroEntrega] = React.useState('')
@@ -21,24 +22,25 @@ const FormPedido = ({ onSubmit }) => {
         duration: null,
     })
 
+    const EndEntregaCompleto = null
+    const EdnColetaCompleto = null
     async function concatenacaoDistanceMatrix(
         logradouroOrigin,
         numeroOrigin,
-        logradouroDestinations,
+        logradouroDestination,
         numeroDestinations
     ) {
-        const logradouroColetaComNumero = logradouroOrigin.split(' - ')[0]
-        const newStreetNameColeta = `${logradouroColetaComNumero} , ${numeroOrigin} - ${
+        const logradouroColetaSemNumero = logradouroOrigin.split(' - ')[0]
+        EdnColetaCompleto = `${logradouroColetaSemNumero} , ${numeroOrigin} - ${
             logradouroOrigin.split(' - ')[1]
         }`
 
-        const logradouroDestinationsComNumero =
-            logradouroDestinations.split(' - ')[0]
-        const newStreetNameDestinations = `${logradouroDestinationsComNumero} , ${numeroDestinations} - ${
-            logradouroDestinations.split(' - ')[1]
+        const LogradouroDestinoSemNumero = logradouroDestination.split(' - ')[0]
+        EndEntregaCompleto = `${LogradouroDestinoSemNumero} , ${numeroDestinations} - ${
+            logradouroDestination.split(' - ')[1]
         }`
 
-        DistanceMatrix(newStreetNameColeta, newStreetNameDestinations)
+        DistanceMatrix(EdnColetaCompleto, EndEntregaCompleto)
     }
 
     async function DistanceMatrix(origin, destination) {
@@ -64,35 +66,28 @@ const FormPedido = ({ onSubmit }) => {
             console.log('Erro ao obter a matriz de distância:', status)
         }
     }
-
+    const { user } = useAuth()
     const FormPedidoSubmit = (event) => {
         const data = {
-            logradouroColeta,
-            email: email,
-            senha: senha,
-            telefone: tel,
+            user,
+            endColeta: EdnColetaCompleto,
+            endEntrega: EndEntregaCompleto,
+            tempo: 45.5,
+            distance,
+            duration,
+            obsEntrega: 'Observação da Entrega',
+            obsColeta: 'Observaçãdta',
+            pgt: 1,
+            tabelaPreco: 1,
         }
-        event.preventDefault()
 
         if (numeroColeta && numeroEntrega) {
             concatenacaoDistanceMatrix(
                 logradouroColeta,
                 numeroColeta,
                 logradouroEntrega,
-                numeroEntrega,
-                setDistanceInfo
+                numeroEntrega
             )
-            onSubmit({
-                logradouroColeta,
-                numeroColeta,
-                obsColeta,
-                referenciaColeta,
-                logradouroEntrega,
-                numeroEntrega,
-                obsEntrega,
-                referenciaEntrega,
-                distanceInfo,
-            })
         } else {
             alert('digite um Numero para Entrega')
         }

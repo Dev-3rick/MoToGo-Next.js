@@ -9,6 +9,7 @@ const AuthProvider = ({ children }) => {
     const router = useRouter()
     const [user, setUser] = useState(null)
     const [response, setResponse] = useState(null)
+    const [order, setOrder] = useState(null)
 
     const login = async (data) => {
         try {
@@ -51,6 +52,24 @@ const AuthProvider = ({ children }) => {
             }
         }
     }
+    const registerOrder = async (data) => {
+        try {
+            const res = await api.post('order', data)
+            setOrder(res.data)
+        } catch (err) {
+            console.log(err)
+            if (response.response.status == '401') {
+                setResponse({
+                    status: true,
+                    message: 'Erro! Tente novamente.',
+                })
+                setUser(null)
+                setTimeout(() => {
+                    setResponse(null)
+                }, 3000)
+            }
+        }
+    }
 
     const values = {
         login,
@@ -58,7 +77,9 @@ const AuthProvider = ({ children }) => {
         setResponse,
         response,
         registerUser,
+        order,
     }
+    console.log(user)
 
     return (
         <AuthContext.Provider value={values}>{children}</AuthContext.Provider>
