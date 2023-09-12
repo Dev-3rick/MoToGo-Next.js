@@ -2,9 +2,10 @@ import React from 'react'
 import Input from '../Fragment/Input'
 import Button from '../Fragment/Button'
 import Place from '../Fragment/Place'
-import useAuth from '@/hooks/useAuth'
+import ConcatEnd from './util/ConcatEnd'
+import DistanceMatrix from './util/DistanceMatrix'
 
-const FormPedido = ({ onSubmit }) => {
+const FormPedido = () => {
     const [mostrarEntrega, setMostrarEntrega] = React.useState(true)
     const [logradouroColeta, setLogradouroColeta] = React.useState('')
     const [numeroColeta, setNumeroColeta] = React.useState('')
@@ -16,75 +17,24 @@ const FormPedido = ({ onSubmit }) => {
     const [referenciaEntrega, setReferenciaEntrega] = React.useState('')
     const [obsEntrega, setObsEntrega] = React.useState('')
 
-    const [distanceInfo, setDistanceInfo] = React.useState({
-        distance: null,
-        duration: null,
-    })
-
-    async function concatenacaoDistanceMatrix(
-        logradouroOrigin,
-        numeroOrigin,
-        logradouroDestination,
-        numeroDestinations
-    ) {
-        const logradouroColetaSemNumero = logradouroOrigin.split(' - ')[0]
-        EdnColetaCompleto = `${logradouroColetaSemNumero} , ${numeroOrigin} - ${
-            logradouroOrigin.split(' - ')[1]
-        }`
-
-        const LogradouroDestinoSemNumero = logradouroDestination.split(' - ')[0]
-        EndEntregaCompleto = `${LogradouroDestinoSemNumero} , ${numeroDestinations} - ${
-            logradouroDestination.split(' - ')[1]
-        }`
-
-        return EdnColetaCompleto, EndEntregaCompleto
-    }
-    DistanceMatrix(EdnColetaCompleto, EndEntregaCompleto)
-    async function DistanceMatrix(origin, destination) {
-        const service = new google.maps.DistanceMatrixService()
-
-        service.getDistanceMatrix(
-            {
-                origins: [origin],
-                destinations: [destination],
-                travelMode: 'DRIVING',
-            },
-            callback
-        )
-    }
-
-    function callback(response, status) {
-        if (status === 'OK') {
-            const distance = response.rows[0].elements[0].distance.text
-            const duration = response.rows[0].elements[0].duration.text
-            setDistanceInfo({ distance, duration })
-            console.log({ distance, duration })
-        } else {
-            console.log('Erro ao obter a matriz de distância:', status)
-        }
-    }
-    const { user } = useAuth()
-    const FormPedidoSubmit = (event) => {
+    const FormPedidoSubmit = async (event) => {
+        event.preventDefault()
         if (numeroColeta && numeroEntrega) {
-            const { EdnColetaCompleto, EndEntregaCompleto } =
-                concatenacaoDistanceMatrix(
-                    logradouroColeta,
-                    numeroColeta,
-                    logradouroEntrega,
-                    numeroEntrega
-                )
+            const { endColeta, endEntrega } = ConcatEnd(logradouroColeta, numeroColeta, logradouroEntrega, numeroEntrega)
+            const { distance, duration } = DistanceMatrix(endColeta, endEntrega)
             const data = {
-                user,
-                endColeta: EdnColetaCompleto,
-                endEntrega: EndEntregaCompleto,
-                tempo: 45.5,
+                user: true,
+                endColeta,
+                endEntrega,
                 distance,
                 duration,
-                obsEntrega: 'Observação da Entrega',
-                obsColeta: 'Observaçãdta',
+                tempo: 45.5,
+                obsColeta,
+                obsEntrega,
                 pgt: 1,
                 tabelaPreco: 1,
             }
+            console.log("🚀 ~ endColetaCompleto ~ ", { data })
         } else {
             alert('digite um Numero para Entrega')
         }
