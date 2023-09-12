@@ -56,16 +56,17 @@ const AuthProvider = ({ children }) => {
         try {
             const res = await api.post('order', data)
             setOrder(res.data)
+            router.push('sucesso')
         } catch (err) {
             console.log(err)
-            if (response.response.status == '401') {
+            if (err.response.status == '401') {
                 setResponse({
                     status: true,
                     message: 'Erro! Tente novamente.',
                 })
-                setUser(null)
                 setTimeout(() => {
                     setResponse(null)
+                    router.push('pedido')
                 }, 3000)
             }
         }
@@ -78,6 +79,7 @@ const AuthProvider = ({ children }) => {
         response,
         registerUser,
         order,
+        registerOrder,
     }
     console.log(user)
 

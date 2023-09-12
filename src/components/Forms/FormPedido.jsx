@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Input from '../Fragment/Input'
 import Button from '../Fragment/Button'
 import Place from '../Fragment/Place'
 import ConcatEnd from './util/ConcatEnd'
 import DistanceMatrix from './util/DistanceMatrix'
+import { AuthContext } from '@/context/authContext'
 
 const FormPedido = () => {
     const [mostrarEntrega, setMostrarEntrega] = React.useState(true)
+    const { registerOrder, user } = useContext(AuthContext)
     const [logradouroColeta, setLogradouroColeta] = React.useState('')
     const [numeroColeta, setNumeroColeta] = React.useState('')
     const [referenciaColeta, setReferenciaColeta] = React.useState('')
@@ -20,10 +22,18 @@ const FormPedido = () => {
     const FormPedidoSubmit = async (event) => {
         event.preventDefault()
         if (numeroColeta && numeroEntrega) {
-            const { endColeta, endEntrega } = ConcatEnd(logradouroColeta, numeroColeta, logradouroEntrega, numeroEntrega)
-            const { distance, duration } = DistanceMatrix(endColeta, endEntrega)
+            const { endColeta, endEntrega } = ConcatEnd(
+                logradouroColeta,
+                numeroColeta,
+                logradouroEntrega,
+                numeroEntrega
+            )
+            const { distance, duration } = await DistanceMatrix(
+                endColeta,
+                endEntrega
+            )
             const data = {
-                user: true,
+                usuarioID: user.usuarioID,
                 endColeta,
                 endEntrega,
                 distance,
@@ -34,7 +44,8 @@ const FormPedido = () => {
                 pgt: 1,
                 tabelaPreco: 1,
             }
-            console.log("🚀 ~ endColetaCompleto ~ ", { data })
+            registerOrder(data)
+            console.log('🚀 ~ endColetaCompleto ~ ', { data })
         } else {
             alert('digite um Numero para Entrega')
         }
