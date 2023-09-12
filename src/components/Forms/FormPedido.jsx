@@ -3,7 +3,6 @@ import Input from '../Fragment/Input'
 import Button from '../Fragment/Button'
 import Place from '../Fragment/Place'
 import ConcatEnd from './util/ConcatEnd'
-import DistanceMatrix from './util/DistanceMatrix'
 import { AuthContext } from '@/context/authContext'
 
 const FormPedido = () => {
@@ -28,16 +27,11 @@ const FormPedido = () => {
                 logradouroEntrega,
                 numeroEntrega
             )
-            const { distance, duration } = await DistanceMatrix(
-                endColeta,
-                endEntrega
-            )
+
             const data = {
-                usuarioID: user.usuarioID,
+                usuarioID: 1,
                 endColeta,
                 endEntrega,
-                distance,
-                duration,
                 tempo: 45.5,
                 obsColeta,
                 obsEntrega,

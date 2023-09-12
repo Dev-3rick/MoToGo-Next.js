@@ -8,7 +8,7 @@ const Pedidos = () => {
     const [DataPedito, setDataPedido] = useState({})
     // const { user } = useAuth()
     const router = useRouter()
-    const user  = true
+    const user = 1
     useEffect(() => {
         if (!user) return router.push('login')
     }, [])
