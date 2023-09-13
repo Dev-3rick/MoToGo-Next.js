@@ -9,15 +9,19 @@ const AuthProvider = ({ children }) => {
     const router = useRouter()
     const [user, setUser] = useState(null)
     const [response, setResponse] = useState(null)
-    const [order, setOrder] = useState(null)
+    const [orders, setOrders] = useState(null)
 
     const login = async (data) => {
         try {
             const res = await api.post('login', data)
-            setUser(res.data)
-            if (res.data.usuarioTipoID == 1) {
+            setUser(res.data.resultVerifyUser)
+            setOrders(res.data.userOrders)
+            console.log(user)
+            console.log(orders)
+
+            if (res.data.resultVerifyUser.usuarioTipoID == 1) {
                 router.push('cliente')
-            } else if (res.data.usuarioTipoID == 2) {
+            } else if (res.data.resultVerifyUser.usuarioTipoID == 2) {
                 router.push('entregador')
             }
         } catch (response) {
@@ -36,7 +40,7 @@ const AuthProvider = ({ children }) => {
 
     const registerUser = async (data) => {
         try {
-            const response = await api.post('register', data)
+            await api.post('register', data)
             router.push('login')
         } catch (response) {
             console.log(response)
@@ -78,11 +82,14 @@ const AuthProvider = ({ children }) => {
         setResponse,
         response,
         registerUser,
-        order,
+        orders,
         registerOrder,
     }
-    console.log(user)
+    console.table(
+        response,
 
+        orders
+    )
     return (
         <AuthContext.Provider value={values}>{children}</AuthContext.Provider>
     )

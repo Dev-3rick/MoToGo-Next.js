@@ -29,10 +29,9 @@ const FormPedido = () => {
             )
 
             const data = {
-                usuarioID: 1,
+                usuarioID: user.usuarioID,
                 endColeta,
                 endEntrega,
-                tempo: 45.5,
                 obsColeta,
                 obsEntrega,
                 pgt: 1,
