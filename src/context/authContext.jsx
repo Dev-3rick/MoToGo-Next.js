@@ -82,7 +82,6 @@ const AuthProvider = ({ children }) => {
         orders,
         registerOrder,
     }
-
     return (
         <AuthContext.Provider value={values}>{children}</AuthContext.Provider>
     )
