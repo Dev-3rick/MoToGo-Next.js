@@ -7,7 +7,7 @@ import Toast from '../Toast'
 const Form = ({ onclick }) => {
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
-    const [user, setUser] = useState(null)
+    const [user, setUser] = useState(1)
 
     const { login, error } = useAuth()
 
