@@ -6,7 +6,8 @@ import FormPedido from '@/components/Forms/FormPedido'
 
 const Pedidos = () => {
     const [DataPedito, setDataPedido] = useState({})
-    const { user } = useAuth()
+    // const { user } = useAuth()
+    const user = true
     const router = useRouter()
     useEffect(() => {
         if (!user) return router.push('login')

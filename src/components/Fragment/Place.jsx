@@ -16,11 +16,6 @@ import {
     CommandInput,
     CommandItem,
 } from '@/components/ui/command'
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from '@/components/ui/popover'
 
 const Place = ({ setSelected, label }) => {
     const {

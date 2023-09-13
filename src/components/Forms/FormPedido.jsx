@@ -4,6 +4,8 @@ import Button from '../Fragment/Button'
 import Place from '../Fragment/Place'
 import ConcatEnd from './util/ConcatEnd'
 import { AuthContext } from '@/context/authContext'
+import Select from '../Fragment/SelectTamanho'
+import SelectTamanho from '../Fragment/SelectTamanho'
 
 const FormPedido = () => {
     const [mostrarEntrega, setMostrarEntrega] = React.useState(true)
@@ -73,13 +75,7 @@ const FormPedido = () => {
                                     setValue={setNumeroColeta}
                                     required
                                 />
-                                <Input
-                                    id="ReferenciaColeta"
-                                    label="Referencia"
-                                    type="text"
-                                    value={referenciaColeta}
-                                    setValue={setReferenciaColeta}
-                                />
+                                <SelectTamanho label="Selecione o tipo da encomenda" />
                                 <div>
                                     <label htmlFor="obs" className="mt-3">
                                         Obs:
