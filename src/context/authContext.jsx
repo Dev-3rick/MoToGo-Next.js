@@ -16,8 +16,6 @@ const AuthProvider = ({ children }) => {
             const res = await api.post('login', data)
             setUser(res.data.resultVerifyUser)
             setOrders(res.data.userOrders)
-            console.log(user)
-            console.log(orders)
 
             if (res.data.resultVerifyUser.usuarioTipoID == 1) {
                 router.push('cliente')
@@ -43,7 +41,6 @@ const AuthProvider = ({ children }) => {
             await api.post('register', data)
             router.push('login')
         } catch (response) {
-            console.log(response)
             if (response.response.status == '401') {
                 setResponse({
                     status: true,
@@ -85,11 +82,7 @@ const AuthProvider = ({ children }) => {
         orders,
         registerOrder,
     }
-    console.table(
-        response,
 
-        orders
-    )
     return (
         <AuthContext.Provider value={values}>{children}</AuthContext.Provider>
     )
