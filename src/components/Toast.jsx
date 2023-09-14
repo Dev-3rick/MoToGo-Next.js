@@ -3,6 +3,7 @@ import useAuth from '@/hooks/useAuth'
 
 const Toast = () => {
     const { response } = useAuth()
+    console.log(response)
     return (
         response &&
         response.status && (

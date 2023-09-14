@@ -12,6 +12,7 @@ const AuthProvider = ({ children }) => {
     const [orders, setOrders] = useState(null)
 
     const login = async (data) => {
+        console.log(data)
         try {
             const res = await api.post('login', data)
             setUser(res.data.resultVerifyUser)
