@@ -49,6 +49,7 @@ const FormData = () => {
                 setValue={setNome}
                 type={'text'}
                 error={nome.length === 0}
+                requird
             />
             <Input
                 id={`email`}
@@ -77,13 +78,12 @@ const FormData = () => {
                 error={senha.length < 6}
             />
             <Toast />
-            <div className="w-2/3 mx-auto mt-4 ">
-                <Button
-                    text="Cadastrar"
-                    color="bg-[#008AFF]/60"
-                    type="submit"
-                />
-            </div>
+
+            <Button
+                text="Cadastrar"
+                className="bg-[#008AFF]/60 mt-4 "
+                type="submit"
+            />
         </form>
     )
 }

@@ -14,6 +14,7 @@ const Form = () => {
     const data = {
         email,
         senha,
+        user: 'Cliente',
     }
 
     const submit = (event) => {

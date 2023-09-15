@@ -1,6 +1,6 @@
 'use client'
 import React, { useState } from 'react'
-import Form from '@/components/Forms/Form'
+import FormLogin from '@/components/Forms/FormLogin'
 import Button from '@/components/Fragment/Button'
 import { useRouter } from 'next/navigation'
 
@@ -33,7 +33,7 @@ const Login = () => {
                     setClick={() => router.push('cadastro_entregador')}
                 />
             </div>
-            <Form />
+            <FormLogin />
         </div>
     )
 }

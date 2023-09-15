@@ -15,6 +15,7 @@ const AuthProvider = ({ children }) => {
         console.log(data)
         try {
             const res = await api.post('login', data)
+
             setUser(res.data.resultVerifyUser)
             setOrders(res.data.userOrders)
 
@@ -24,6 +25,7 @@ const AuthProvider = ({ children }) => {
                 router.push('entregador')
             }
         } catch (response) {
+            console.log(response)
             if (response.response.status == '401') {
                 setResponse({
                     status: true,

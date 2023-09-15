@@ -1,5 +1,5 @@
 import React from 'react'
-import FormData from './Forms/FormData'
+import FormData from './Forms/FormCadastroCliente'
 
 const Cadastro = () => {
     return (
