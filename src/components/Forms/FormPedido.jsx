@@ -4,7 +4,6 @@ import Button from '../Fragment/Button'
 import Place from '../Fragment/Place'
 import ConcatEnd from './util/ConcatEnd'
 import { AuthContext } from '@/context/authContext'
-import Select from '../Fragment/SelectTamanho'
 import SelectTamanho from '../Fragment/SelectTamanho'
 
 const FormPedido = () => {
@@ -12,7 +11,7 @@ const FormPedido = () => {
     const { registerOrder, user } = useContext(AuthContext)
     const [logradouroColeta, setLogradouroColeta] = React.useState('')
     const [numeroColeta, setNumeroColeta] = React.useState('')
-    const [referenciaColeta, setReferenciaColeta] = React.useState('')
+
     const [obsColeta, setObsColeta] = React.useState('')
 
     const [logradouroEntrega, setLogradouroEntrega] = React.useState('')

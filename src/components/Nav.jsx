@@ -29,14 +29,6 @@ const Nav = ({ children }) => {
                                 Contato
                             </a>
                         </li>
-                        <li>
-                            <a
-                                href="/admin/login"
-                                className="hover:text-gray-300"
-                            >
-                                Adminstrador
-                            </a>
-                        </li>
                     </ul>
                 </nav>
             </header>

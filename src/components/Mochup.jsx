@@ -2,7 +2,6 @@
 import React, { useState } from 'react'
 
 const Mochup = ({ children }) => {
-    const [type, setType] = useState('')
     return (
         <div
             style={{ borderRadius: '80px' }}

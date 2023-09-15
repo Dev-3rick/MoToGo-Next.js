@@ -1,17 +1,11 @@
 import React from 'react'
 
-import usePlacesAutocomplete, {
-    getGeocode,
-    getLatLng,
-} from 'use-places-autocomplete'
+import usePlacesAutocomplete from 'use-places-autocomplete'
 
 import { Check, ChevronsUpDown } from 'lucide-react'
 
-import { cn } from '@/lib/utils'
-import { Button } from '@/components/ui/popover'
 import {
     Command,
-    CommandEmpty,
     CommandGroup,
     CommandInput,
     CommandItem,
@@ -19,7 +13,6 @@ import {
 
 const Place = ({ setSelected, label }) => {
     const {
-        ready,
         value,
         suggestions: { status, data },
         setValue,

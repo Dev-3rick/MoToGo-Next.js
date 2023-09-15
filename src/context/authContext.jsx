@@ -59,7 +59,7 @@ const AuthProvider = ({ children }) => {
     const registerOrder = async (data) => {
         try {
             const res = await api.post('order', data)
-            setOrder(res.data)
+            setOrders(res.data)
             router.push('sucesso')
         } catch (err) {
             console.log(err)

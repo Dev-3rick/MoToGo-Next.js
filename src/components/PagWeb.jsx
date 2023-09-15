@@ -1,6 +1,4 @@
 import React from 'react'
-import Nav from './Nav'
-import Mochup from './Mochup'
 
 const PagWeb = ({ children }) => {
     return (

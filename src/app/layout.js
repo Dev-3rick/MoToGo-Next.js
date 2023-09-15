@@ -16,9 +16,6 @@ export const metadata = {
 }
 
 export default function RootLayout({ children }) {
-    const location = usePathname()
-    const router = useRouter()
-    console.log(location)
     return (
         <>
             <head>
@@ -30,15 +27,12 @@ export default function RootLayout({ children }) {
             <html lang="pt-br">
                 <body>
                     <AuthProvider>
-                        {/* <Nav> */}
-                        {location.includes('/admin') ? (
+                        <Nav>
                             <Admin />
-                        ) : (
-                            // <PagWeb>
-                            <Mochup>{children}</Mochup>
-                            // </PagWeb>
-                        )}
-                        {/* </Nav> */}
+                            <PagWeb>
+                                <Mochup>{children}</Mochup>
+                            </PagWeb>
+                        </Nav>
                     </AuthProvider>
                 </body>
             </html>
