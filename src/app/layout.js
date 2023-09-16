@@ -1,5 +1,5 @@
 import '../styles/globals.css'
-import { Inter } from 'next/font/google'
+import { Baloo_2 } from 'next/font/google'
 
 import { AuthProvider } from '@/context/authContext'
 import PagWeb from '@/components/PagWeb'
@@ -8,7 +8,10 @@ import { usePathname, useRouter } from 'next/navigation'
 import Admin from './admin/page'
 import Nav from '@/components/Nav'
 
-const inter = Inter({ subsets: ['latin'] })
+const mainFontFamily = Baloo_2({
+    weight: ['400', '500', '700'],
+    subsets: ['latin-ext'],
+})
 
 export const metadata = {
     title: 'MotoGo',
@@ -25,14 +28,14 @@ export default function RootLayout({ children }) {
                 ></script>
             </head>
             <html lang="pt-br">
-                <body>
+                <body className={mainFontFamily.className}>
                     <AuthProvider>
-                        <Nav>
-                            <Admin />
-                            <PagWeb>
-                                <Mochup>{children}</Mochup>
-                            </PagWeb>
-                        </Nav>
+                        {/* <Nav> */}
+                        <Admin />
+                        {/* <PagWeb> */}
+                        <Mochup>{children}</Mochup>
+                        {/* </PagWeb> */}
+                        {/* </Nav> */}
                     </AuthProvider>
                 </body>
             </html>
