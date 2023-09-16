@@ -11,7 +11,6 @@ const FormPedido = () => {
     const { registerOrder, user } = useContext(AuthContext)
     const [logradouroColeta, setLogradouroColeta] = React.useState('')
     const [numeroColeta, setNumeroColeta] = React.useState('')
-
     const [obsColeta, setObsColeta] = React.useState('')
 
     const [logradouroEntrega, setLogradouroEntrega] = React.useState('')

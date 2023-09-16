@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
 import Input from '../Fragment/Input'
 import Button from '../Fragment/Button'
-import { AuthContext } from '@/context/authContext'
+import { AuthContext, setResponse } from '@/context/authContext'
 import Toast from '../Toast'
 
 const FormData = () => {
@@ -9,6 +9,7 @@ const FormData = () => {
 
     const [nome, setNome] = useState('')
     const [senha, setSenha] = useState('')
+    const [ConfirmacaoSenha, setConfirmacaoSenha] = useState()
     const [tel, setTel] = useState('')
     const [email, setEmail] = useState('')
 
@@ -20,10 +21,19 @@ const FormData = () => {
             senha: senha,
             telefone: tel,
         }
-
         if (data && data.email && data.senha && data.telefone) {
-            registerUser(data)
-            console.log('ok')
+            if (ConfirmacaoSenha === senha) {
+                registerUser(data)
+                console.log('ok')
+            } else {
+                setResponse({
+                    status: true,
+                    message: 'Senha Diferente',
+                })
+                setTimeout(() => {
+                    setResponse(null)
+                }, 3000)
+            }
         } else {
             setResponse({
                 status: true,
@@ -36,11 +46,7 @@ const FormData = () => {
     }
 
     return (
-        <form
-            className="mt-3 flex flex-col gap-1 w-full py-3 "
-            onSubmit={handleSubmit}
-        >
-            {/* Campos do formulário */}
+        <form className="mt-3 flex flex-col  w-full  " onSubmit={handleSubmit}>
             <Input
                 id={`nome`}
                 label={`Nome Completo`}
@@ -49,7 +55,7 @@ const FormData = () => {
                 setValue={setNome}
                 type={'text'}
                 error={nome.length === 0}
-                requird
+                required
             />
             <Input
                 id={`email`}
@@ -75,15 +81,31 @@ const FormData = () => {
                 value={senha}
                 setValue={setSenha}
                 type={'password'}
-                error={senha.length < 6}
+            />{' '}
+            <Input
+                id={`senha`}
+                label={`Confirme sua senha`}
+                placeholder={'Confirme Sua senha'}
+                value={ConfirmacaoSenha}
+                setValue={setConfirmacaoSenha}
+                type={'password'}
             />
             <Toast />
-
             <Button
                 text="Cadastrar"
                 className="bg-[#008AFF]/60 mt-4 "
                 type="submit"
             />
+            <div className="mt-4 flex justify-center items-center">
+                {' '}
+                <label htmlFor="Entregador">Cadastre-se como: </label>
+                <Button
+                    text="Entregador"
+                    type="button"
+                    className={'bg-[#F3C29A] ml-4 p-2   rounded-md  shadow-xl '}
+                    setClick={() => router.push('cadastro_entregador')}
+                />
+            </div>
         </form>
     )
 }

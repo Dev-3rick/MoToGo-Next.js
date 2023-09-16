@@ -9,6 +9,7 @@ const Button = ({ text, type, color, className, setClick }) => {
                 onClick={() => {
                     setClick(text)
                 }}
+                name={text}
             >
                 {text}
             </button>

@@ -8,7 +8,7 @@ const Toast = () => {
         response &&
         response.status && (
             <div
-                className={`text-sm  p-2 mt-2 text-white bg-red-200 rounded-md z-50`}
+                className={`text-sm  p-2 mt-2 text-white bg-red-400 rounded-md z-50`}
             >
                 <h1>{response.message}</h1>
             </div>

@@ -24,14 +24,6 @@ const Login = () => {
                     type={'button'}
                     setClick={() => router.push('cadastro')}
                 />{' '}
-                <Button
-                    text="Entregador"
-                    type="button"
-                    className={
-                        'bg-[#F3C29A]  flex-1  p-2  rounded-md font-semibold shadow-xl '
-                    }
-                    setClick={() => router.push('cadastro_entregador')}
-                />
             </div>
             <FormLogin />
         </div>

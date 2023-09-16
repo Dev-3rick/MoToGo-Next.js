@@ -30,12 +30,12 @@ export default function RootLayout({ children }) {
             <html lang="pt-br">
                 <body className={mainFontFamily.className}>
                     <AuthProvider>
-                        {/* <Nav> */}
-                        <Admin />
-                        {/* <PagWeb> */}
-                        <Mochup>{children}</Mochup>
-                        {/* </PagWeb> */}
-                        {/* </Nav> */}
+                        <Nav>
+                            <Admin />
+                            <PagWeb>
+                                <Mochup>{children}</Mochup>
+                            </PagWeb>
+                        </Nav>
                     </AuthProvider>
                 </body>
             </html>

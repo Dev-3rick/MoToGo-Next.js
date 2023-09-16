@@ -11,7 +11,7 @@ const Input = ({
     props,
 }) => {
     return (
-        <div className="flex flex-auto flex-col gap-2">
+        <div className="flex flex-auto flex-col mt-1">
             <label htmlFor={id} className="text-[#52525C]">
                 {label}
             </label>
