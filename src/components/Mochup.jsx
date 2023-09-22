@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 const Mochup = ({ children }) => {
     return (
         <div
-            style={{ borderRadius: '80px' }}
+            style={{ borderRadius: '81px' }}
             className="w-[375px] h-[752px] m-auto mt-16 relative  bg-zinc-200  z-[-0] flex flex-col rounded-3xl  items-center"
         >
             <img
